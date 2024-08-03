@@ -1,3 +1,83 @@
+Tech Stack of this Project:
+1. Frontend and Backend - Next.js (or Backend)
+2. Express - Auxilary backends
+3. Turborepo
+4. Postgres Database
+5. Prisma ORM
+6. Tailwind
+ 
+
+- Bootstrap Turborepo Project
+- Made user-app folder in apps
+- Tailwind added in user-app
+    - Get boilerplate commands from tailwind website
+    - Configure the tailwind.config file
+- Made user-app and merchant-app in apps (nextjs)
+- Adding Prisma
+    - Make a db folder in packages
+    - Initializze npm and ts
+    - Get a connection string from neon or aiven
+    - I've used docker in developement
+    - Initialize Prisma and check the database running...
+- DB
+    - Made model User, Merchant
+    - Migrated
+- Added NextAuth
+- Created Store (recoil) atoms, hooks
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Turborepo starter
 
 This is an official starter Turborepo.

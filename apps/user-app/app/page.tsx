@@ -1,12 +1,12 @@
-import { PrismaClient } from "@propayn/db/client";
+"use client"
+import { signIn, signOut, useSession } from "next-auth/react";
+import { Appbar } from "@propayn/ui/appbar";
 
-
-const client = new PrismaClient();
-
-export default function Home() {
+export default function Page(): JSX.Element {
+  const session = useSession();
   return (
-    <div className="font-extrabold">
-      hello
-    </div>
+   <div>
+      <Appbar onSignin={signIn} onSignout={signOut} user={session.data?.user} />
+   </div>
   );
 }
