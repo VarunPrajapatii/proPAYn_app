@@ -21,11 +21,16 @@ Tech Stack of this Project:
     - Initialize Prisma and check the database running...
 - DB
     - Made model User, Merchant
-    - Migrated
-- Added NextAuth
+    - Migrated and created prisma client
+- Made some ui components
+- Created auth endpoint and logic using nextauth in user and merchant
 - Created Store (recoil) atoms, hooks
-
+- On Ramping:
+    - Make a new bakend server that hdfc server will hit.
+    (Hdfc tells that user charged 2000 and send to propayn kotak bank, then we can credit 2000 to user propayn wallet.)
+    - Create a dummy bank server
     
+
 
 
 

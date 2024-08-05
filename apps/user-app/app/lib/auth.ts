@@ -19,6 +19,7 @@ export const authOptions = {
                     number: credentials.phone
                 }
             });
+                //it signup the user, if the user is already signed up then it sign in the user.
 
             if (existingUser) {
                 const passwordValidation = await bcrypt.compare(credentials.password, existingUser.password);
@@ -26,7 +27,7 @@ export const authOptions = {
                     return {
                         id: existingUser.id.toString(),
                         name: existingUser.name,
-                        email: existingUser.number
+                        number: existingUser.number
                     }
                 }
                 return null;
@@ -39,11 +40,12 @@ export const authOptions = {
                         password: hashedPassword
                     }
                 });
+                // Logic to send otp to the user as numbers can be hijacked
             
                 return {
                     id: user.id.toString(),
                     name: user.name,
-                    email: user.number
+                    number: user.number
                 }
             } catch(e) {
                 console.error(e);
