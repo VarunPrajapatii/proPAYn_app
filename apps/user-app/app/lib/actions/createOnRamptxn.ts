@@ -9,7 +9,8 @@ export async function createOnRampTransaction(amount: number, provider: string) 
     const session = await getServerSession(authOptions);
     const token = Math.random().toString();
     const userId = session.user.id;
-
+    console.log(session);
+    
     if(!userId) {
         return {
             message: "User not logged in."
