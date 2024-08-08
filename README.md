@@ -25,11 +25,20 @@ Tech Stack of this Project:
 - Made some ui components
 - Created auth endpoint and logic using nextauth in user and merchant
 - Created Store (recoil) atoms, hooks
-- On Ramping:
+- On Ramping("Onramp to bank" typically refers to the process or method by which users can convert or transfer funds from a digital or non-traditional currency (such as cryptocurrency) into traditional fiat currency that can be deposited into a bank account.):
     - Make a new bakend server that hdfc server will hit.
     (Hdfc tells that user charged 2000 and send to propayn kotak bank, then we can credit 2000 to user propayn wallet.)
     - Create a dummy bank server
-    
+- Created few UI components and basic dashboard for transfer ui
+- Finished Onramp action for onclick of transfer.
+- Simulating the bank webhook which on hitting success the request and balance added to the wallet.
+- Created a Sidebar P2P Transfer and /p2p ui.
+- Created action to make person to person payment through the phone number that is already present in the database.
+- BUG FIX: Parallel transfers from the wallet restricted through locking the row until transaction completes.
+    (Prisma doesnt support lock, which is why we send a raw sql query directly that will lock the specific row, until the txn succeeds or fails)
+    Thats how I've done balance protection.
+
+
 
 
 
