@@ -7,6 +7,9 @@ Tech Stack of this Project:
 6. Tailwind
  
 
+
+ 
+
 - Bootstrap Turborepo Project
 - Made user-app folder in apps
 - Tailwind added in user-app

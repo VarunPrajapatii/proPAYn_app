@@ -18,6 +18,7 @@ app.post("/hdfcWebhook", async (req, res) => {
         amount: req.body.amount
     };
 
+    console.log(req.body);
     try {
         await db.$transaction([
             // TODO: Add zod validations here.
@@ -40,6 +41,7 @@ app.post("/hdfcWebhook", async (req, res) => {
                     status: "Success"
                 }
             })
+            
         ]);
 
         res.status(200).json({
