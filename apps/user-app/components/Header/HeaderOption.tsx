@@ -1,11 +1,19 @@
+"use client";
+import { useRouter } from "next/navigation";
+import { ReactNode } from "react";
 
-interface ComponentProps {
-    name: string;
-}
+// interface ComponentProps {
+//     name: string;
+// }
+// interface ButtonProps {
+//     onClick: () => void;
+//   }
 
-const HeaderOption: React.FC<ComponentProps> = ({name}) => {
+const HeaderOption = ({name, href}: {name: string, href: string}) => {
+    const router = useRouter();
+
     return (
-        <button className="px-4 py-1  hover:bg-customBlue-light hover:text-white font-bold rounded-full">
+        <button onClick={() => router.push(href)} className="px-4 py-1  hover:bg-customBlue-light hover:text-white font-bold rounded-full">
             {name}
         </button>
     );

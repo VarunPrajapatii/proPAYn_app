@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Title1 = () => {
     return (
-        <div className="flex justify-between">
+        <div className="flex justify-between bg-slate-50 pt-32">
             <div className=" pl-36 pt-52 h-screen">
                 <div className=" font-bold pb-3 text-customBlue-mid text-4xl">
                     The ProPAYn app

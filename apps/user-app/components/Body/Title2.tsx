@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Title2 = () => {
     return (
-        <div className="flex justify-between">
+        <div className="flex justify-between pt-44 bg-customWhite">
             <div className="pl-36">
                 <Image src={"/images/title2.jpg"} height={800} width={700} alt="title1"/>
             </div>
