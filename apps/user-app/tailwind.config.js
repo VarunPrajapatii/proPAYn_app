@@ -16,6 +16,9 @@ module.exports = {
           light: '#508C9B',
         },
       },
+      scrollbar: {
+        hide: 'scrollbar-width: none; -ms-overflow-style: none;',
+      },
     },
     
   },

@@ -15,6 +15,8 @@ model User {
   password          String
   OnRampTransaction OnRampTransaction[]
   Balance           Balance[]
+  sentTransactions  P2PLedger[]         @relation("UserTransaction") // Transactions initiated by this user
+  receivedTransactions P2PLedger[]      @relation("RelatedUserTransaction") // Transactions received by this user
 }
 
 model Merchant {
@@ -43,6 +45,17 @@ model Balance {
   user   User @relation(fields: [userId], references: [id])
 }
 
+model P2PLedger {
+  id                Int         @id @default(autoincrement())
+  user_no           String
+  amount            Int
+  transactionType   LedgerType
+  relatedUser_no    String?     // The ID of the other user involved in the transaction (either sender or receiver)
+  timestamp         DateTime    @default(now())
+  user              User        @relation(fields: [user_no], references: [number], name: "UserTransaction")
+  relatedUser       User?       @relation(fields: [relatedUser_no], references: [number], name: "RelatedUserTransaction")
+}
+
 enum AuthType {
   Google
   Github
@@ -52,4 +65,9 @@ enum OnRampStatus {
   Success
   Failure
   Processing
+}
+
+enum LedgerType {
+  Credit
+  Debit
 }

@@ -40,7 +40,7 @@ export const authOptions = {
                         password: hashedPassword
                     }
                 });
-                const balance = await db.balance.create({
+                await db.balance.create({
                     data: {
                         userId: user.id,
                         amount: 0,
@@ -65,10 +65,20 @@ export const authOptions = {
     secret: process.env.JWT_SECRET || "secret",
     callbacks: {
         // TODO: can u fix the type here? Using any is bad
-        async session({ token, session }: any) {
-            session.user.id = token.sub
+        async session({ token, session,}: any) {
+            console.log(token);
+            
+            session.user.id = token.sub;
+            session.user.number = token.number;
 
             return session
+        },
+        async jwt({token, user}: any) {
+            if(user) {
+                token.sub = user.id;
+                token.number = user.number;
+            }
+            return token;
         }
     }
   }

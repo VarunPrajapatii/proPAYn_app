@@ -7,7 +7,9 @@ import prisma from "@propayn/db/client";
 export async function p2pTransfer(to: string, amount: number) {
     const session = await getServerSession(authOptions);
     const from = session?.user?.id;
-    console.log(session);
+    const from_no = session?.user?.number;
+    console.log("Session: " ,session);
+    console.log("From Number: " ,from_no);
 
     if(!from) {
         return {
@@ -28,6 +30,8 @@ export async function p2pTransfer(to: string, amount: number) {
     }
 
     await prisma.$transaction(async (tx) => {
+
+        //TODO: Although Prisma handles SQL injection, the raw SQL query with template literals might be a concern. Ensure that any user input is properly sanitized.
         await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${Number(from)} FOR UPDATE`
 
         const fromBalance = await tx.balance.findUnique({
@@ -51,5 +55,24 @@ export async function p2pTransfer(to: string, amount: number) {
             where: { userId: toUser.id },
             data: { amount: { increment: amount } },
         });
+        console.log("from_no:", from_no);
+        console.log("toUser.number:", toUser.number);
+        console.log("from:", from);
+        await tx.p2PLedger.createMany({
+            data: [
+              {
+                user_no: from_no, // `from` is the user number
+                amount: -amount,
+                transactionType: "Debit",
+                relatedUser_no: toUser.number // `toUser.number` is the user number
+              },
+              {
+                user_no: toUser.number, // `toUser.number` is the user number
+                amount: amount,
+                transactionType: "Credit",
+                relatedUser_no: from_no // `from` is the user number
+              }
+            ]
+          });
     })
 }
