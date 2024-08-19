@@ -4,6 +4,8 @@ import { BalanceCard } from "../../../components/BalanceCard";
 import { OnRampTransactions } from "../../../components/OnRampTransactions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
+import p2ptransactionslist from "../../lib/actions/p2ptransactionslist";
+import P2pTxnList from "../../../components/P2pTxnList";
 
 async function getBalance() {
     const session = await getServerSession(authOptions);
@@ -25,6 +27,8 @@ async function getOnRampTransactions() {
             userId: Number(session?.user?.id)
         }
     });
+    console.log(txns);
+    
     return txns.map(t => ({
         time: t.startTime,
         amount: t.amount,
@@ -33,9 +37,21 @@ async function getOnRampTransactions() {
     }))
 }
 
+
+
 export default async function() {
     const balance = await getBalance();
     const transactions = await getOnRampTransactions();
+    console.log(transactions);
+    console.log("new");
+    console.log("new");
+    console.log("new");
+    console.log("new");
+    console.log("new");
+    
+    const p2plist = await p2ptransactionslist();
+    console.log(p2plist);
+    
 
     return <div className="w-screen">
         <div className="text-4xl text-[#6a51a6] pt-8 mb-8 font-bold">
@@ -49,6 +65,7 @@ export default async function() {
                 <BalanceCard amount={balance.amount} locked={balance.locked} />
                 <div className="pt-4">
                     <OnRampTransactions transactions={transactions} />
+                    <P2pTxnList transactions={p2plist} />
                 </div>
             </div>
         </div>

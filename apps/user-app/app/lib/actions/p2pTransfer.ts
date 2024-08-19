@@ -3,13 +3,14 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
 import prisma from "@propayn/db/client";
+import p2ptransactions from "./p2ptransactionslist";
 
 export async function p2pTransfer(to: string, amount: number) {
     const session = await getServerSession(authOptions);
     const from = session?.user?.id;
     const from_no = session?.user?.number;
-    console.log("Session: " ,session);
-    console.log("From Number: " ,from_no);
+    // console.log("Session: " ,session);
+    // console.log("From Number: " ,from_no);
 
     if(!from) {
         return {
@@ -55,9 +56,9 @@ export async function p2pTransfer(to: string, amount: number) {
             where: { userId: toUser.id },
             data: { amount: { increment: amount } },
         });
-        console.log("from_no:", from_no);
-        console.log("toUser.number:", toUser.number);
-        console.log("from:", from);
+        // console.log("from_no:", from_no);
+        // console.log("toUser.number:", toUser.number);
+        // console.log("from:", from);
         await tx.p2PLedger.createMany({
             data: [
               {
@@ -73,6 +74,7 @@ export async function p2pTransfer(to: string, amount: number) {
                 relatedUser_no: from_no // `from` is the user number
               }
             ]
-          });
+        });
+        p2ptransactions()
     })
 }

@@ -66,7 +66,7 @@ export const authOptions = {
     callbacks: {
         // TODO: can u fix the type here? Using any is bad
         async session({ token, session,}: any) {
-            console.log(token);
+            // console.log(token);
             
             session.user.id = token.sub;
             session.user.number = token.number;
