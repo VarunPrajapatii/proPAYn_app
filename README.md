@@ -40,6 +40,9 @@ Tech Stack of this Project:
 - BUG FIX: Parallel transfers from the wallet restricted through locking the row until transaction completes.
     (Prisma doesnt support lock, which is why we send a raw sql query directly that will lock the specific row, until the txn succeeds or fails)
     Thats how I've done balance protection.
+- Completely Changed ProPAYn application UI (dashboard, transferpage, p2ptransfer page)
+- Added P2P ledger schema to schema.prisma
+
 
 
 

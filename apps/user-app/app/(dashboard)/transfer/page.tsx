@@ -27,7 +27,7 @@ async function getOnRampTransactions() {
             userId: Number(session?.user?.id)
         }
     });
-    console.log(txns);
+    // console.log(txns);
     
     return txns.map(t => ({
         time: t.startTime,
@@ -50,7 +50,7 @@ export default async function() {
     console.log("new");
     
     const p2plist = await p2ptransactionslist();
-    console.log(p2plist);
+    // console.log(p2plist);
     
 
     return <div className="w-screen">
