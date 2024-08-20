@@ -1,7 +1,40 @@
 import P2pTxnLists from "../../../components/P2PTxnLists";
+import { useEffect, useState } from "react";
+import { getBalance, getP2pTransactions } from "../../lib/getServerSideProps";
 
+type P2PTransactions = {
+    user_no: string,
+    time: Date,
+    amount: number,
+    transactionType: string,
+    relatedUser_no: string
+};
 
 export default function PayPage() {
+    const [number, setNumber] = useState("");
+    const [amount, setAmount] = useState(0);
+    const [balance, setBalance] = useState({ amount: 0, locked: 0 });
+    const [transactions, setTransactions] = useState<P2PTransactions[]>([]);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const balanceData = await getBalance();
+                setBalance(balanceData);
+                
+                const transactionsData = await getP2pTransactions();
+                setTransactions(transactionsData);
+
+            } catch (error) {
+                console.error("Failed to fetch data", error);
+            }
+        };
+
+        fetchData();
+    }, [])
+
+
     return (
         // <div className="bg-[url('/images/couple_using_propayn.jpg')] bg-cover bg-center h-screen bg-opacity-85">
         //     <div className="">
@@ -31,7 +64,7 @@ export default function PayPage() {
                                     </div>
                                     <div className="p-5">
                                         <div className="font-extrabold text-3xl">
-                                            Rs. 300.75
+                                            Rs. {balance.amount / 100}
                                         </div>
                                         <div className="font-light text-sm">
                                             Your Wallet Balance
@@ -53,6 +86,7 @@ export default function PayPage() {
                                             id="price" 
                                             className="mb-10 px-24 py-3 block w-full text-xl font-semibold rounded-md border-0 pl-7 pr-20 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-customBlue-dark " 
                                             placeholder="0.00"
+                                            onChange={(e) => setAmount(Number(e.target.value))}
                                         />
                                     </div>
                                     <label className="text-2xl font-semibold">Number</label>
@@ -63,7 +97,7 @@ export default function PayPage() {
                                             name="price" 
                                             id="price" 
                                             className=" px-14 py-3 block w-full text-xl font-semibold rounded-md border-0  pr-20 ring-1 ring-inset ring-gray-300  focus:ring-2 focus:ring-inset focus:ring-customBlue-dark " 
-                                            
+                                            onChange={(e) => {setNumber(e.target.value)}}
                                         />
                                     </div>
                                 </div>

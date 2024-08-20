@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation"
-import { createOnRampTransaction } from "../../../lib/actions/createOnRamptxn";
+import { createOnRampTransaction } from "../../lib/actions/createOnRamptxn";
 
 export default function PaymentMode() {
     const searchParams = useSearchParams();
@@ -46,7 +46,9 @@ export default function PaymentMode() {
                                     className="bg-customBlue-dark text-white rounded-md px-64 py-3 hover:bg-customBlue-mid"
                                     onClick={async () => {
                                         await createOnRampTransaction(amount * 100, "HDFC Bank");
-                                        window.location.href = "https://netbanking.hdfcbank.com";
+                                        console.log(amount);
+                                        
+                                        // window.location.href = "https://netbanking.hdfcbank.com";
                                     }}
                                 >Proceed Securely</button>
                             </div>
