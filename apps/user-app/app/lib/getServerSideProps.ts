@@ -11,15 +11,14 @@ export const getP2pTransactions = async () => {
     const list = await prisma.p2PLedger.findMany({
         where: {
             OR: [
-                {user_no: number},
-                {relatedUser_no: number}
+                {user_no: number}
             ]
         },
         orderBy: {
             timestamp: 'desc'
         }
     });
-    console.log(list);
+    // console.log(list);
     return list.map(l => ({
         user_no: l.user_no,
         time: l.timestamp,

@@ -4,8 +4,8 @@ import { BalanceCard } from "../../../components/BalanceCard";
 import { OnRampTransactions } from "../../../components/OnRampTransactions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
-import p2ptransactionslist from "../../lib/actions/p2ptransactionslist";
 import P2pTxnList from "../../../components/P2pTxnList";
+import { getP2pTransactions } from "../../lib/getServerSideProps";
 
 async function getBalance() {
     const session = await getServerSession(authOptions);
@@ -49,7 +49,7 @@ export default async function() {
     console.log("new");
     console.log("new");
     
-    const p2plist = await p2ptransactionslist();
+    const p2plist = await getP2pTransactions();
     // console.log(p2plist);
     
 
