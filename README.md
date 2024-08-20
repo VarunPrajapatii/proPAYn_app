@@ -11,37 +11,39 @@ Tech Stack of this Project:
  
 
 - Bootstrap Turborepo Project
-- Made user-app folder in apps
-- Tailwind added in user-app
+- Made user-app, merchant-app folder in apps
+- Tailwind added
     - Get boilerplate commands from tailwind website
     - Configure the tailwind.config file
-- Made user-app and merchant-app in apps (nextjs)
 - Adding Prisma
     - Make a db folder in packages
-    - Initializze npm and ts
-    - Get a connection string from neon or aiven
-    - I've used docker in developement
+    - Initialize npm and ts
+    - Get a connection string from neon or aiven (I've used docker postgres container in developement)
     - Initialize Prisma and check the database running...
 - DB
     - Made model User, Merchant
     - Migrated and created prisma client
-- Made some ui components
-- Created auth endpoint and logic using nextauth in user and merchant
+- Made some ui components (easy for tests)
+- Created auth endpoint and logic using nextauth in user(credentials login) and merchant(google login)
 - Created Store (recoil) atoms, hooks
-- On Ramping("Onramp to bank" typically refers to the process or method by which users can convert or transfer funds from a digital or non-traditional currency (such as cryptocurrency) into traditional fiat currency that can be deposited into a bank account.):
-    - Make a new bakend server that hdfc server will hit.
-    (Hdfc tells that user charged 2000 and send to propayn kotak bank, then we can credit 2000 to user propayn wallet.)
-    - Create a dummy bank server
-- Created few UI components and basic dashboard for transfer ui
+- On Ramping("Onramp to bank" typically refers to the process or method by which users can convert or transfer funds from a digital or non-traditional currency (such as cryptocurrency) into traditional fiat currency that can be deposited into a bank account):
+    - Make a new backend server to stimulate OnRamp Transaction.
+    (lets say Hdfc, tells that user charged 2000 and send to, lets say propayn kotak bank, then we can credit 2000 to user propayn wallet.)
+    - Create a dummy bank server with an endpoint
+- Created transfer ui
 - Finished Onramp action for onclick of transfer.
-- Simulating the bank webhook which on hitting success the request and balance added to the wallet.
-- Created a Sidebar P2P Transfer and /p2p ui.
+- Simulating the bank webhook which on hitting success the request and amount added to the wallet.
+- Created a Sidebar, P2P Transfer and /p2p ui.
 - Created action to make person to person payment through the phone number that is already present in the database.
 - BUG FIX: Parallel transfers from the wallet restricted through locking the row until transaction completes.
     (Prisma doesnt support lock, which is why we send a raw sql query directly that will lock the specific row, until the txn succeeds or fails)
     Thats how I've done balance protection.
-- Completely Changed ProPAYn application UI (dashboard, transferpage, p2ptransfer page)
 - Added P2P ledger schema to schema.prisma
+- Created action to fetch OnRamp Transactions
+- Created action to fetch P2P Transactions
+- Completey made new UI for dashboard, transfer and paypage
+- Fully Functional UI Version 1 with features: add balance, transfer person to person
+- Started testing Edge Cases
 
 
 
