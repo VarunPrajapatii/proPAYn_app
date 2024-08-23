@@ -43,7 +43,7 @@ export default function P2pTxnLists({
                                 </div>
                             </div>
                         </div>
-                        <div className={`px-8 py-10 text-xl font-bold`}>
+                        <div className={`px-8 py-10 text-xl font-bold ${(transaction.transactionType === "Credit") ? "text-green-600" : "text-red-600"}`}>
                             {(transaction.transactionType === "Credit") ? "+": ""}{transaction.amount / 100}
                         </div>
                     </div>

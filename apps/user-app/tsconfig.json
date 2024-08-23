@@ -13,6 +13,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "../../packages/db/global.ts"  ],
   "exclude": ["node_modules"]
 }

@@ -118,9 +118,11 @@ export default function PayPage() {
                             <div className="flex justify-center py-8 text-2xl font-semibold ">
                                 Wallet Transfers
                             </div>
-                            {
-                                transactions.map(t => <P2pTxnLists transaction={t} />)
-                            }
+                            <div className="max-h-[36rem] overflow-y-auto">
+                                {
+                                    transactions.map(t => <P2pTxnLists transaction={t} />)
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

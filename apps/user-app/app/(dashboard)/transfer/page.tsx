@@ -89,11 +89,13 @@ export default function() {
                             <div className="flex justify-center py-8 text-2xl font-semibold">
                                 Bank to Wallet Transfers
                             </div>
-                            {
-                                (!transactions.length) ? 
-                                    <div className="text-xl font-bold">No Transactions</div>
-                                : transactions.map((t, index) => <OnRampTxnlist key={index} transaction={t} />)
-                            }
+                            <div className="max-h-[36rem] overflow-y-auto">
+                                {
+                                    (!transactions.length) ? 
+                                        <div className="text-xl font-bold">No Transactions</div>
+                                    : transactions.map((t, index) => <OnRampTxnlist key={index} transaction={t} />)
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
