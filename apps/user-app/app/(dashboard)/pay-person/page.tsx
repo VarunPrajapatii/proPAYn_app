@@ -18,14 +18,15 @@ export default function PayPage() {
     const [amount, setAmount] = useState(0);
     const [balance, setBalance] = useState({ amount: 0, locked: 0 });
     const [transactions, setTransactions] = useState<P2PTransactions[]>([]);
-
+    const [amountError, setAmountError] = useState("");
+    const [numberError, setNumberError] = useState("");
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const balanceData = await getBalance();
                 setBalance(balanceData);
-                
+
                 const transactionsData = await getP2pTransactions();
                 setTransactions(transactionsData);
 
@@ -35,92 +36,162 @@ export default function PayPage() {
         };
 
         fetchData();
-    }, [])
+    }, []);
 
+    const handleSend = () => {
+        let valid = true;
+        if (amount <= 0) {
+            setAmountError("Enter a valid amount.");
+            valid = false;
+        } else {
+            setAmountError("");
+        }
+        if (number.length !== 10) {
+            setNumberError("Enter a valid 10-digit phone number.");
+            valid = false;
+        } else {
+            setNumberError("");
+        }
+        if (valid) {
+            p2pTransfer(number, amount * 100);
+        }
+    };
 
     return (
-        // <div className="bg-[url('/images/couple_using_propayn.jpg')] bg-cover bg-center h-screen bg-opacity-85">
-        //     <div className="">
-        //         hi there
-                
-        //     </div>
-        // </div>
-        <div className="relative h-screen">
-            <div className="absolute inset-0 bg-[url('/images/couple_using_propayn.jpg')] bg-cover bg-center opacity-65 blur-sm -z-20"> </div>
-            <div className="relative z-10">
-                <div className=" font-bold text-6xl flex justify-center pt-7 bg-">
-                    Pay Friends
-                </div>
-                <div className="flex justify-between pt-12">
-                    <div className=" pl-32 pr-5 w-full">
-                        <div className="bg-slate-200 p-10 opacity-80 rounded-3xl">
-                            <div className="">
-                                <div className="flex items-center">
-                                    <div className="">
-                                        <svg 
-                                            xmlns="http://www.w3.org/2000/svg" 
-                                            viewBox="0 0 512 512"
-                                            className="w-12 h-12 mr-4 ml-4 text-customBlue-mid fill-current">
-                                            <path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L80 128c-8.8 0-16-7.2-16-16s7.2-16 16-16l368 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L64 32zM416 272a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
-                                        />
-                                        </svg>
+        <div className="min-h-screen pt-20 px-8 bg-transparent text-black dark:text-white">
+            <div className="max-w-7xl mx-auto">
+                <h1 className="font-bold text-3xl text-center mb-10">Pay Friends</h1>
+                <div className="flex flex-col lg:flex-row gap-8">
+                    {/* Wallet Balance & Pay Form */}
+                    <div className="lg:w-1/2 w-full">
+                        <div className="p-8 bg-black/25 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg backdrop-blur-xl">
+                            <div className="flex items-center mb-6">
+                                <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    viewBox="0 0 512 512"
+                                    className="w-12 h-12 mr-4 text-customBlue-mid fill-current">
+                                    <path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L80 128c-8.8 0-16-7.2-16-16s7.2-16 16-16l368 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L64 32zM416 272a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
+                                </svg>
+                                <div>
+                                    <div className="font-extrabold text-3xl">
+                                        ₹ {balance.amount / 100}
                                     </div>
-                                    <div className="p-5">
-                                        <div className="font-extrabold text-3xl">
-                                            Rs. {balance.amount / 100}
-                                        </div>
-                                        <div className="font-light text-sm">
-                                            Your Wallet Balance
-                                        </div>
+                                    <div className="font-light text-sm">
+                                        Your Wallet Balance
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                {/* <div className="text-center">
-                                    Add Money to Wallet
-                                </div> */}
-                                <div className="m-8">
-                                    <label className="text-2xl font-semibold">Amount</label>
-                                    <div className="relative mt-2 rounded-md shadow-sm">
-                                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">₹</div>
-                                        <input 
-                                            type="text" 
-                                            name="price" 
-                                            id="price" 
-                                            className="mb-10 px-24 py-3 block w-full text-xl font-semibold rounded-md border-0 pl-7 pr-20 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-customBlue-dark " 
+                            <div className="mt-8 space-y-8">
+                                {/* Amount Input */}
+                                <div className="mt-8 w-full h-20">
+                                    <div className="text-sm font-semibold h-[20%]">Amount</div>
+                                    <div className="h-[80%] pt-2 text-4xl relative group">
+                                        <span className="absolute left-0 top-1/2 -translate-y-1/2 text-2xl text-black/60 dark:text-white/60 pl-1 pointer-events-none select-none">
+                                            ₹
+                                        </span>
+                                        <input
+                                            type="number"
+                                            maxLength={9}
+                                            className="pl-8 w-[80%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300
+                                                [&::-webkit-outer-spin-button]:appearance-none
+                                                [&::-webkit-inner-spin-button]:appearance-none
+                                                appearance-none
+                                            "
                                             placeholder="0.00"
-                                            onChange={(e) => setAmount(Number(e.target.value))}
+                                            value={amount === 0 ? "" : amount}
+                                            onChange={e => {
+                                                const value = e.currentTarget.value;
+                                                if (/^\d{0,6}(\.\d{0,2})?$/.test(value) || value === "") {
+                                                    setAmountError(""); // clear error on change
+                                                    setAmount(value === "" ? 0 : Number(value));
+                                                } else {
+                                                    setAmountError("You can only enter up to 6 digits before the decimal and up to 2 non-zero digits after (max 9 characters).");
+                                                }
+                                            }}
+                                        />
+                                        <span
+                                            className="
+                                                absolute left-0 bottom-0 h-[2px] w-[80%] bg-black dark:bg-white
+                                                scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100
+                                                origin-left transition-transform duration-300
+                                                pointer-events-none
+                                            "
                                         />
                                     </div>
-                                    <label className="text-2xl font-semibold">Number</label>
-                                    <div className="relative mt-2 rounded-md shadow-sm">
-                                        <div className="pointer-events-none absolute inset-y-0 text-xl left-0 flex items-center pl-3">+91</div>
-                                        <input 
-                                            type="text" 
-                                            name="price" 
-                                            id="price" 
-                                            className=" px-14 py-3 block w-full text-xl font-semibold rounded-md border-0  pr-20 ring-1 ring-inset ring-gray-300  focus:ring-2 focus:ring-inset focus:ring-customBlue-dark " 
-                                            onChange={(e) => {setNumber(e.target.value)}}
-                                        />
-                                    </div>
+                                    {amountError && (
+                                        <div className="text-xs text-red-500 mt-1">{amountError}</div>
+                                    )}
                                 </div>
-                                <div className="flex justify-center m-10 mt-20">
-                                    <button 
-                                        className="bg-customBlue-dark px-24 py-3 rounded-md font-bold text-xl text-white"
-                                        onClick={() => {p2pTransfer(number, amount * 100)}}
-                                    >Send Money</button>
+                                {/* Number Input */}
+                                <div className="mt-8 w-full h-20">
+                                    <div className="text-sm font-semibold h-[20%]">Number</div>
+                                    <div className="h-[80%] pt-2 text-4xl relative group">
+                                        <span className="absolute left-0 top-1/2 -translate-y-1/2 text-xl text-black/60 dark:text-white/60 pl-1 pointer-events-none select-none">
+                                            +91
+                                        </span>
+                                        <input
+                                            type="text"
+                                            name="number"
+                                            id="number"
+                                            maxLength={10}
+                                            className="pl-14 w-[80%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300
+                                                focus:ring-0
+                                            "
+                                            placeholder="Phone number"
+                                            value={number}
+                                            onChange={e => {
+                                                const value = e.target.value;
+                                                if (/^\d{0,10}$/.test(value)) {
+                                                    setNumber(value);
+                                                    setNumberError("");
+                                                } else if (value.length > 10) {
+                                                    setNumberError("Phone number cannot exceed 10 digits.");
+                                                } else {
+                                                    setNumberError("Invalid phone number.");
+                                                }
+                                            }}
+                                        />
+                                        <span
+                                            className="
+                                                absolute left-0 bottom-0 h-[2px] w-[80%] bg-black dark:bg-white
+                                                scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100
+                                                origin-left transition-transform duration-300
+                                                pointer-events-none
+                                            "
+                                        />
+                                    </div>
+                                    {numberError && (
+                                        <div className="text-xs text-red-500 mt-1">{numberError}</div>
+                                    )}
+                                </div>
+                                <div className="flex justify-center mt-8">
+                                    <button
+                                        className="bg-customBlue-dark px-10 py-3 rounded-md font-bold text-xl text-white hover:bg-customBlue-mid transition"
+                                        onClick={() => {
+                                            if (amount <= 0 || isNaN(amount*1000)) {
+                                                setAmountError("Please enter a valid amount greater than 0.");
+                                                return;
+                                            }
+                                            handleSend();
+                                        }}
+                                    >
+                                        Send Money
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="pr-32 pl-5 w-full">
-                        <div className="bg-slate-100  opacity-80 rounded-3xl">
-                            <div className="flex justify-center py-8 text-2xl font-semibold ">
+                    {/* Wallet Transfers List */}
+                    <div className="lg:w-1/2 w-full flex flex-col">
+                        <div className="bg-black/25 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg backdrop-blur-xl flex flex-col h-full">
+                            <div className="flex justify-center pt-6 pb-2 text-2xl font-semibold">
                                 Wallet Transfers
                             </div>
-                            <div className="max-h-[36rem] overflow-y-auto">
+                            <div className="flex-1 overflow-y-auto max-h-[66vh] px-6 pb-6">
                                 {
-                                    transactions.map(t => <P2pTxnLists transaction={t} />)
+                                    (!transactions.length) ? 
+                                        <div className="text-xl font-bold text-center mt-8">No Transactions</div>
+                                    : transactions.map((t, idx) => <P2pTxnLists key={idx} transaction={t} />)
                                 }
                             </div>
                         </div>

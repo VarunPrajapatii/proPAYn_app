@@ -1,5 +1,6 @@
 // import { SidebarItem } from "./../../components/SidebarItem"
 
+
 export default function Layout({
   children,
 }: {
@@ -17,9 +18,9 @@ export default function Layout({
     //     </div>
     //         {children}
     // </div>
-    <div>
-      {children}
-    </div>
+      <div className="">
+        {children}
+      </div>
   );
 }
 
