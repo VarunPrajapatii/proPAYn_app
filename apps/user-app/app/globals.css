@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Add to your global CSS file or in a <style> block */
+@keyframes vertical-move {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px); /* Move up */
+  }
+  100% {
+    transform: translateY(0); /* Return to the original position */
+  }
+}
+
+.moving-circle {
+  animation: vertical-move 6s ease-in-out infinite;
+}
+
+.moving-circle-small {
+  animation: vertical-move 6s ease-in-out infinite;
+  animation-delay: 2s; /* Delay for staggered effect */
+}
