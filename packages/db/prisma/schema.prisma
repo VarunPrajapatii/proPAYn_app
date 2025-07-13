@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,52 +8,100 @@ datasource db {
 }
 
 model User {
-  id                Int                 @id @default(autoincrement())
-  email             String?             @unique
-  name              String?
-  number            String              @unique
-  password          String
-  OnRampTransaction OnRampTransaction[]
-  Balance           Balance[]
-  sentTransactions  P2PLedger[]         @relation("UserTransaction") // Transactions initiated by this user
-  receivedTransactions P2PLedger[]      @relation("RelatedUserTransaction") // Transactions received by this user
-}
-
-model Merchant {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  auth_type AuthType
+  id                        String                @id @default(uuid())
+  email                     String?               @unique
+  name                      String?
+  number                    String                @unique
+  password                  String
+  OnRampTransaction         OnRampTransaction[]
+  Balance                   Balance[]
+  sentTransactions          P2PLedger[]           @relation("UserTransaction") // Transactions initiated by this user
+  receivedTransactions      P2PLedger[]           @relation("RelatedUserTransaction") // Transactions received by this user
 }
 
 model OnRampTransaction {
-  id        Int          @id @default(autoincrement())
-  status    OnRampStatus
-  token     String       @unique
-  provider  String
-  amount    Int
-  startTime DateTime
-  userId    Int
-  user      User         @relation(fields: [userId], references: [id])
+  txn_id                    String                @id
+  order_id                  String                @unique   
+  reference_number          String                @unique 
+  userId                    String
+  amount                    Int
+  provider                  String
+  session_token             String                @unique
+  status                    OnRampStatus
+  startTime                 DateTime
+  gateway_txn_id            String?                // ID from the payment gateway
+  bank_session_id           String?
+  failure_reason            String?
+  callbackIdempotencyKey    String?               @unique
+  completedTime             DateTime?
+  user                      User                  @relation(fields: [userId], references: [id])
+
+  @@index([userId, status])
+  @@index([startTime])
 }
 
 model Balance {
-  id     Int  @id @default(autoincrement())
-  userId Int  @unique
-  amount Int
-  locked Int
-  user   User @relation(fields: [userId], references: [id])
+  id                        String                @id @default(uuid())
+  userId                    String                @unique
+  amount                    Int                   @default(0)
+  locked                    Int                   @default(0) // when user withdrawls then until transaction complete, amount is locked
+  user                      User                  @relation(fields: [userId], references: [id])
 }
 
+model PaymentSession {
+  id                    String                        @id
+  idempotencyKey        String                        @unique
+  merchantTxnId         String                        @unique                      // FK into OnRampTransaction.id
+  order_id              String                        @unique
+  userId                String                                         // FK into User.id
+  amount                Int                                            // in paise or smallest currency unit
+  provider              String                                       // e.g. “HDFC_NETBANKING”
+  session_token         String                        @unique
+  callbackUrl           String                                      // where to send user back afterwards
+  checkoutExpires       DateTime                                      // when sessionToken/jwt expires
+  status                PaymentStatus                 @default(INIT)               // INIT → PENDING → SUCCESS | FAILED
+  bank_session_id       String?                                      // the ID returned by the bank
+  createdAt             DateTime                      @default(now())
+  updatedAt             DateTime                      @updatedAt
+
+  @@index([status, createdAt])
+  @@index([userId])
+}
+
+
+model BankWebhook {
+  id                        Int                   @id @default(autoincrement())
+  bank_session_id           String                @unique
+  createdAt                 DateTime              @default(now())
+}
+
+
+
 model P2PLedger {
-  id                Int         @id @default(autoincrement())
-  user_no           String
-  amount            Int
-  transactionType   LedgerType
-  relatedUser_no    String?     // The ID of the other user involved in the transaction (either sender or receiver)
-  timestamp         DateTime    @default(now())
-  user              User        @relation(fields: [user_no], references: [number], name: "UserTransaction")
-  relatedUser       User?       @relation(fields: [relatedUser_no], references: [number], name: "RelatedUserTransaction")
+  id                        Int                   @id @default(autoincrement())
+  user_no                   String  
+  amount                    Int
+  transactionType           LedgerType
+  relatedUser_no            String?
+  timestamp                 DateTime              @default(now())
+  user                      User                  @relation(fields: [user_no], references: [number], name: "UserTransaction")
+  relatedUser               User?                 @relation(fields: [relatedUser_no], references: [number], name: "RelatedUserTransaction")
+}
+
+model Merchant {
+  id                        Int                   @id @default(autoincrement())
+  email                     String                @unique
+  name                      String?
+  auth_type                 AuthType
+}
+
+
+/// Possible states of a PaymentSession
+enum PaymentStatus {
+  INIT        // just created
+  PENDING     // sent off to bank, user on bank page
+  SUCCESS     // bank callback said “success”
+  FAILED      // bank callback said “failure”
 }
 
 enum AuthType {

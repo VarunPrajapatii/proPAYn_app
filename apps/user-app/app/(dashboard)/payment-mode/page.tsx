@@ -9,7 +9,7 @@ import NetBanking from "../../../components/PaymentMode/NetBanking";
 import UPICard from "../../../components/PaymentMode/UPICard";
 
 export default function PaymentMode() {
-    const [currentPage, setCurrentPage] = useState('Credit/Debit Card')
+    const [currentPage, setCurrentPage] = useState('Net Banking')
 
     const searchParams = useSearchParams();
 
