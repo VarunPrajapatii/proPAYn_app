@@ -10,7 +10,7 @@ import { Providers } from "../../provider";
 const Header = () => {
     const router = useRouter();
     return (
-        <div className="flex bg-customWhite justify-between" >
+        <div className="absolute w-screen flex items-center py-1 bg-customWhite justify-between z-50" >
             <Providers>
                 <div className="flex pl-20">
                     <div className="hover:cursor-pointer">
@@ -22,14 +22,14 @@ const Header = () => {
                         onClick={() => {router.push("/dashboard")}}
                         />
                     </div>
-                    <div className=" pl-20 pt-6">
-                        <HeaderOption href={"/transfer"} name="Add Money" />
+                    <div className="flex items-center pl-20">
+                        <HeaderOption href={"/add-money"} name="Add Money" />
                         <HeaderOption href={"/pay-person"} name="Send Money" />
                     </div>
                 </div>
-                <div className="pr-56 pt-3">
+                <div className="pr-56">
                     <button 
-                        className="text-customWhite bg-customBlue-dark p-4 rounded-full font-bold hover:bg-customBlue-mid"
+                        className="text-customWhite bg-customBlue-dark py-2 px-4 rounded-full font-bold hover:bg-customBlue-mid"
                         onClick={async () => {
                             await signOut()
                             router.push("/api/auth/signin")

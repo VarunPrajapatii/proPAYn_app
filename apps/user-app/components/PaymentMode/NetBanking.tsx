@@ -1,12 +1,24 @@
 import { on } from 'events';
+import { useRouter } from 'next/navigation';
 import  { useEffect, useState, useRef } from 'react';
 
 const banks = ["SBI", "HDFC", "ICICI", "AXIS"];
 
-const NetBanking = ({amount, onPay}: {amount: number, onPay: (amount: number, provider: string) => void}) => {
+const NetBanking = ({amount, onPay}: {amount: number, onPay: (amount: number, provider: string)=> Promise<string | { message: string }>}) => {
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState<string | null>(null);
+    const [selected, setSelected] = useState<string>("");
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
+
+    const handleClick = async () => {
+        const response = await onPay(amount, selected);
+        if (typeof response === "string") {
+            router.push(response);
+        } else {
+            alert(`Payment initiation failed. Please try again: ${response.message}`);
+            console.error(response.message);
+        }
+    }
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -47,12 +59,11 @@ const NetBanking = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                                         <li key={bank}>
                                             <button
                                                 type="button"
-                                                className="w-full text-left block px-5 py-2 rounded-lg transition-all duration-150 hover:bg-white/70 hover:backdrop-blur-md hover:font-semibold dark:hover:bg-zinc-800/80 dark:hover:text-indigo-400"
                                                 onClick={() => {
                                                     setSelected(bank);
                                                     setOpen(false);
-                                                    onPay(amount, bank);
                                                 }}
+                                                className="w-full text-left block px-5 py-2 rounded-lg transition-all duration-150 hover:bg-white/70 hover:backdrop-blur-md hover:font-semibold dark:hover:bg-zinc-800/80 dark:hover:text-indigo-400"
                                             >
                                                 {bank}
                                             </button>
@@ -64,6 +75,7 @@ const NetBanking = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
 
                         <button
                             type="button"
+                            onClick={handleClick}
                             className="mt-8 px-10 py-2 text-lg font-bold rounded-2xl bg-gradient-to-r from-indigo-500/60 via-blue-500/60 to-emerald-400/60 text-white shadow-lg shadow-indigo-200/30 border-none outline-none transition-all duration-200 hover:from-indigo-600/60 hover:to-emerald-500/50 hover:scale-105 focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-zinc-900"
                         >
                             <span className="inline-flex items-center gap-2">

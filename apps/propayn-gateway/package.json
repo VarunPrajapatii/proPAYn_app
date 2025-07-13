@@ -1,5 +1,5 @@
 {
-  "name": "@propayn/bank-webhook",
+  "name": "@propayn/propayn-gateway",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,10 @@
   "dependencies": {
     "@propayn/db": "*",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.10",
+    "axios": "^1.10.0",
     "esbuild": "^0.23.0",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
   }
 }

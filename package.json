@@ -1,5 +1,5 @@
 {
-  "name": "proPAYn_app",
+  "name": "propayn",
   "private": true,
   "scripts": {
     "build": "turbo build",
