@@ -36,7 +36,7 @@ export async function p2pTransfer(to: string, amount: number) {
 
         const fromBalance = await tx.balance.findUnique({
             where: {
-                userId: Number(from),
+                userId: from,
             }
         });
         
@@ -48,7 +48,7 @@ export async function p2pTransfer(to: string, amount: number) {
             throw new Error('Insufficient funds');
         }
         await tx.balance.update({
-            where: { userId: Number(from) },
+            where: { userId: from },
             data: { amount: { decrement: amount } },
         });
         await tx.balance.update({
