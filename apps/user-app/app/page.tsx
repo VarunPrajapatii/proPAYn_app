@@ -15,14 +15,26 @@
 import { getServerSession } from "next-auth";
 import { redirect } from 'next/navigation'
 import { authOptions } from "./lib/auth";
+import Title1 from "../components/Landing/Title1";
+import Title2 from "../components/Landing/Title2";
+import Title3 from "../components/Landing/Title3";
+import Footer from "../components/Footer/Footer";
 
-export default async function Page() {
-  const session = await getServerSession(authOptions);
-  console.log("session looks like: ", session);
-  // console.log(session);
-  if (session?.user) {
-    redirect('/dashboard')
-  } else {
-    redirect('/api/auth/signin')
-  }
+export default async function LandingPage() {
+  return (
+    <div className="scrollbar-hide">
+        <div className="">
+          <Title1 />
+        </div>
+        <div>
+          <Title2 />
+        </div>
+        <div>
+          <Title3 />
+        </div>
+        <div>
+          <Footer/>
+        </div>
+    </div>
+  )
 }

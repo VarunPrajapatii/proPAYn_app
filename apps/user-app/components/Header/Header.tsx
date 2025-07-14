@@ -1,40 +1,70 @@
-"use client";
-
 import Image from "next/image";
 import HeaderOption from "./HeaderOption";
-import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Providers } from "../../provider";
+import { Button } from "../AppbarClient";
+import { useMode } from "@propayn/store/useMode";
 
 
-const Header = () => {
+interface HeaderProps {
+    user?: {
+        name?: string | null;
+    },
+    onSignin: any,
+    onSignout: any
+}
+
+const Header = ({ onSignin, onSignout, user }: HeaderProps) => {
+
     const router = useRouter();
+    const {isDarkMode} = useMode();
     return (
-        <div className="absolute w-screen flex items-center py-1 bg-customWhite justify-between z-50" >
+        <div className="fixed top-2 left-1/2 transform -translate-x-1/2 w-[95%] max-w-6xl z-50">
             <Providers>
-                <div className="flex pl-20">
-                    <div className="hover:cursor-pointer">
-                        <Image
-                        src="/images/header_Propayn_logo.png" // Update the path to match where your image is stored
-                        alt="Description of the image"
-                        width={200} // Specify the width of the image
-                        height={20} // Specify the height of the image
-                        onClick={() => {router.push("/dashboard")}}
-                        />
+                <div className="backdrop-blur-xl bg-black/10 dark:bg-white/10 rounded-2xl border-2 border-black/15 dark:border-white/15 shadow-lg px-6 py-4">
+                    <div className="flex items-center justify-between">
+                        {/* Logo Section */}
+                        <div className="flex items-center space-x-8">
+                            <div className="hover:cursor-pointer transition-transform hover:scale-105">
+                                <Image
+                                    src={`/${isDarkMode ? "header_Propayn_logo_dark.png" : "header_Propayn_logo.png"}`}
+                                    alt="ProPAYn Logo"
+                                    width={140}
+                                    height={35}
+                                    onClick={() => {router.push("/")}}
+                                    className="object-contain"
+                                />
+                            </div>
+                            
+                            {/* Navigation Links */}
+                            {
+                                user ? (
+                                    <div className="hidden md:flex items-center space-x-2">
+                                        <HeaderOption href={"/add-money"} name="Add Money" />
+                                        <HeaderOption href={"/pay-person"} name="Send Money" />
+                                    </div>
+                                ) : (
+                                    <div className="hidden md:flex items-center space-x-2">
+                                        
+                                    </div>
+                                )
+                            }
+                        </div>
+
+                        <Button onClick={user ? onSignout : onSignin}>
+                            <span className="text-black dark:text-white">
+                                {user ? "Log Out" : "Log In"}
+                            </span>
+                        </Button>
                     </div>
-                    <div className="flex items-center pl-20">
-                        <HeaderOption href={"/add-money"} name="Add Money" />
-                        <HeaderOption href={"/pay-person"} name="Send Money" />
+
+                    {/* Mobile Navigation */}
+                    <div className="md:hidden mt-4 pt-4 border-t border-black/10 dark:border-white/10">
+                        <div className="flex justify-center space-x-4">
+                            <HeaderOption href={"/add-money"} name="Add Money" />
+                            <HeaderOption href={"/pay-person"} name="Send Money" />
+                        </div>
                     </div>
-                </div>
-                <div className="pr-56">
-                    <button 
-                        className="text-customWhite bg-customBlue-dark py-2 px-4 rounded-full font-bold hover:bg-customBlue-mid"
-                        onClick={async () => {
-                            await signOut()
-                            router.push("/api/auth/signin")
-                        }}
-                    >Log Out</button>
                 </div>
             </Providers>
         </div>

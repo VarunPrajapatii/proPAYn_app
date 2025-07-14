@@ -24,3 +24,17 @@
   animation: vertical-move 6s ease-in-out infinite;
   animation-delay: 2s; /* Delay for staggered effect */
 }
+
+/* Vertical looping animation for image gallery */
+@keyframes loop-vertically {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-loop-vertically {
+  animation: loop-vertically 30s linear infinite;
+}
