@@ -58,13 +58,13 @@ export default function PayPage() {
     };
 
     return (
-        <div className="min-h-screen pt-20 px-8 bg-transparent text-black dark:text-white">
+        <div className="min-h-screen pt-24 px-8 bg-transparent text-black dark:text-white">
             <div className="max-w-7xl mx-auto">
                 <h1 className="font-bold text-3xl text-center mb-10">Pay Friends</h1>
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* Wallet Balance & Pay Form */}
                     <div className="lg:w-1/2 w-full">
-                        <div className="p-8 bg-black/25 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg backdrop-blur-xl">
+                        <div className="p-8 backdrop-blur-xl bg-black/10 dark:bg-white/10 rounded-2xl border-2 border-black/15 dark:border-white/15 shadow-lg">
                             <div className="flex items-center mb-6">
                                 <svg 
                                     xmlns="http://www.w3.org/2000/svg" 
@@ -183,7 +183,7 @@ export default function PayPage() {
                     </div>
                     {/* Wallet Transfers List */}
                     <div className="lg:w-1/2 w-full flex flex-col">
-                        <div className="bg-black/25 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg backdrop-blur-xl flex flex-col h-full">
+                        <div className="backdrop-blur-xl bg-black/10 dark:bg-white/10 rounded-2xl border-2 border-black/15 dark:border-white/15 shadow-lg flex flex-col h-full">
                             <div className="flex justify-center pt-6 pb-2 text-2xl font-semibold">
                                 Wallet Transfers
                             </div>

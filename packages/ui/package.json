@@ -3,14 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./button": "./src/button.tsx",
-    "./card": "./src/card.tsx",
-    "./code": "./src/code.tsx",
-    "./appbar": "./src/Appbar.tsx",
-    "./center": "./src/Center.tsx",
-    "./select": "./src/Select.tsx",
-    "./textinput": "./src/TextInput.tsx",
-    "./BgWrapper": "./src/BgWrapper.tsx"
+    "./button": "./src/button.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
