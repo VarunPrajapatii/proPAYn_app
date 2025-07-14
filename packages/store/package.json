@@ -2,10 +2,12 @@
   "name": "@propayn/store",
   "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "recoil": "^0.7.7"
-  },
   "exports": {
-    "./balance": "./src/hooks/useBalance.ts"
+    "./balance": "./src/hooks/useBalance.ts",
+    "./mode": "./src/atoms/mode.ts",
+    "./useMode": "./src/hooks/useMode.ts"
+  },
+  "dependencies": {
+    "jotai": "^2.12.5"
   }
 }
