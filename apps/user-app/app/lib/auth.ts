@@ -62,10 +62,14 @@ export const authOptions = {
           },
         })
     ],
+    pages: {
+      signIn: '/auth/signin',
+      error: '/auth/error',
+    },
     secret: process.env.JWT_SECRET || "secret",
     callbacks: {
         // TODO: can u fix the type here? Using any is bad
-        async session({ token, session,}: any) {
+        async session({ token, session }: { token: any; session: any }) {
             // console.log(token);
             
             session.user.id = token.sub;
@@ -73,7 +77,7 @@ export const authOptions = {
 
             return session
         },
-        async jwt({token, user}: any) {
+        async jwt({ token, user }: { token: any; user: any }) {
             if(user) {
                 token.sub = user.id;
                 token.number = user.number;
@@ -81,5 +85,5 @@ export const authOptions = {
             return token;
         }
     }
-  }
+}
   
