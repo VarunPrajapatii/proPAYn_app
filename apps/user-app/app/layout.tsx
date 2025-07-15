@@ -6,12 +6,13 @@ import Mode from "./Mode";
 import { authOptions } from "./lib/auth";
 import { getServerSession } from "next-auth";
 import Header from "../components/Header/Header";
+import { poppins, nunito, jetbrains } from "./fonts";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Wallet",
-  description: "Simple wallet app",
+  title: "proPAYn",
+  description: "Wallet application to add and transfer funds.",
 };
 
 export default async function RootLayout({children,}: {children: React.ReactNode}): Promise<JSX.Element> {
@@ -19,7 +20,26 @@ export default async function RootLayout({children,}: {children: React.ReactNode
   const session = await getServerSession(authOptions)
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning className={`${poppins.variable} ${nunito.variable} ${jetbrains.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var stored = localStorage.getItem('theme-mode');
+                  var isDark = stored === null 
+                    ? window.matchMedia('(prefers-color-scheme: dark)').matches 
+                    : stored === 'dark';
+                  if (isDark) {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <Providers session={session}>
         <body className={inter.className}>
           <Mode>

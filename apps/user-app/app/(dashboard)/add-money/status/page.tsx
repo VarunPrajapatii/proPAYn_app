@@ -52,7 +52,7 @@ export default function PaymentStatusPage() {
     }
     if (error) {
         return (
-            <div className="w-full h-screen flex items-center justify-center bg-black">
+            <div className="w-full h-screen flex items-center justify-center ">
                 <div className="max-w-md text-center">
                     <div className="text-6xl text-red-500 mb-4">❌</div>
                     <h2 className="text-2xl font-bold text-red-600 mb-2">Error</h2>
@@ -134,7 +134,11 @@ export default function PaymentStatusPage() {
                 <div className="text-center py-4 text-sm text-gray-500 bg-black/25 dark:bg-white/5">
                     <button 
                         onClick={() => router.push('/add-money')}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                        className="px-4 py-2 text-white dark:text-white rounded-xl font-semibold text-sm 
+                        hover:text-black dark:hover:text-white  
+                        transition-all duration-200 border border-transparent 
+                        hover:border-black/20 dark:hover:border-white/20 backdrop-blur-sm
+                        bg-black/20 dark:bg-white/20  dark:border-white/30 hover:bg-black/30 dark:hover:bg-white/30 hover:scale-105 shadow-lg"
                     >
                         Go Back to Wallet
                     </button>
