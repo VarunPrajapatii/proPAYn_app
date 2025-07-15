@@ -6,9 +6,21 @@ import { useState } from "react";
 import CreditCard from "../../../components/PaymentMode/CreditCard";
 import NetBanking from "../../../components/PaymentMode/NetBanking";
 import UPICard from "../../../components/PaymentMode/UPICard";
+import { useRequireAuth } from "../../lib/hooks/useAuth";
+import FullPageLoader from "../../../components/FullPageLoader";
+import { redirect } from "next/navigation";
 
 export default function PaymentMode() {
     const [currentPage, setCurrentPage] = useState('Net Banking')
+    
+    const { isAuthenticated, isLoading } = useRequireAuth();
+    if (isLoading) {
+        return <FullPageLoader />;
+    }
+
+    if (!isAuthenticated) {
+        redirect('/auth/signin');
+    }
 
     const searchParams = useSearchParams();
 

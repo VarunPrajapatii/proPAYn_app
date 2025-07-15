@@ -3,6 +3,10 @@ import OnRampTxnlist from "../../../components/OnRampTxnList";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { getBalance, getOnRampTransactions } from "../../lib/getServerSideProps";
+import FullPageLoader from '../../../components/FullPageLoader';
+import { useRequireAuth } from "../../lib/hooks/useAuth";
+import { redirect } from "next/navigation";
+import Button from "@propayn/ui/button";
 
 type OnRampTransaction = {
     time: Date;
@@ -18,6 +22,14 @@ export default function TransferPage() {
     const [transactions, setTransactions] = useState<OnRampTransaction[]>([]);
     const [isValidAmount, setIsValidAmount] = useState(false);
     const router = useRouter();
+    const { isAuthenticated, isLoading } = useRequireAuth();
+    if (isLoading) {
+        return <FullPageLoader />;
+    }
+
+    if (!isAuthenticated) {
+        redirect('/auth/signin');
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -120,11 +132,11 @@ export default function TransferPage() {
                                         </div>
                                     </div>
                                     <div className="flex justify-center mt-8">
-                                        <button 
-                                            className="bg-customBlue-dark px-10 py-3 rounded-md font-bold text-xl text-white hover:bg-customBlue-mid dark:hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                                        <Button 
+                                            className="!font-bold rounded-2xl bg-emerald-200/50 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-100 dark:hover:bg-emerald-800 hover:scale-105 shadow-lg border-2 border-emerald-200 dark:border-emerald-700 hover:border-emerald-300 dark:hover:border-emerald-600"
                                             disabled={!isValidAmount || !!amountError}
                                             onClick={() => {
-                                                if (amount <= 0 || isNaN(amount*1000)) {
+                                                if (amount <= 0 || isNaN(amount * 100)) {
                                                     setAmountError("Please enter a valid amount greater than 0.");
                                                     return;
                                                 }
@@ -132,7 +144,7 @@ export default function TransferPage() {
                                             }}
                                         >
                                             Add Money to Wallet
-                                        </button>
+                                        </Button>
                                     </div>
                                 </div>
                             </div>

@@ -1,9 +1,11 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Providers } from "../provider";
-import { AppbarClient } from "../components/AppbarClient";
+import { Providers } from "./provider";
 import Mode from "./Mode";
+import { authOptions } from "./lib/auth";
+import { getServerSession } from "next-auth";
+import Header from "../components/Header/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,18 +14,17 @@ export const metadata: Metadata = {
   description: "Simple wallet app",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}): JSX.Element {
+export default async function RootLayout({children,}: {children: React.ReactNode}): Promise<JSX.Element> {
+
+  const session = await getServerSession(authOptions)
+
   return (
     <html lang="en">
-      <Providers>
+      <Providers session={session}>
         <body className={inter.className}>
           <Mode>
             <div className={`min-w-screen`}>
-              <AppbarClient/>
+              <Header />
               <div className="">
                 <div className="w-screen min-h-screen fixed bg-gradient-to-br from-white/90 to-white/95 -z-50 dark:from-zinc-800 dark:to-black"></div>
                 <div className="-z-50 absolute h-[240px] w-[650px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

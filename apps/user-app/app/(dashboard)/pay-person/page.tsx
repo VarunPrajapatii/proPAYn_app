@@ -4,6 +4,10 @@ import P2pTxnLists from "../../../components/P2PTxnLists";
 import { useEffect, useState } from "react";
 import { getBalance, getP2pTransactions } from "../../lib/getServerSideProps";
 import { p2pTransfer } from "../../lib/actions/p2pTransfer";
+import { useRequireAuth } from "../../lib/hooks/useAuth";
+import FullPageLoader from "../../../components/FullPageLoader";
+import { redirect } from "next/navigation";
+import Button from "@propayn/ui/button";
 
 type P2PTransactions = {
     user_no: string,
@@ -20,6 +24,15 @@ export default function PayPage() {
     const [transactions, setTransactions] = useState<P2PTransactions[]>([]);
     const [amountError, setAmountError] = useState("");
     const [numberError, setNumberError] = useState("");
+
+    const { isAuthenticated, isLoading } = useRequireAuth();
+    if (isLoading) {
+        return <FullPageLoader />;
+    }
+
+    if (!isAuthenticated) {
+        redirect('/auth/signin');
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -56,6 +69,7 @@ export default function PayPage() {
             p2pTransfer(number, amount * 100);
         }
     };
+
 
     return (
         <div className="min-h-screen pt-24 px-8 bg-transparent text-black dark:text-white">
@@ -165,8 +179,8 @@ export default function PayPage() {
                                     )}
                                 </div>
                                 <div className="flex justify-center mt-8">
-                                    <button
-                                        className="bg-customBlue-dark px-10 py-3 rounded-md font-bold text-xl text-white hover:bg-customBlue-mid transition"
+                                    <Button
+                                        className="!font-bold rounded-2xl bg-emerald-200/50 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-100 dark:hover:bg-emerald-800 hover:scale-105 shadow-lg border-2 border-emerald-200 dark:border-emerald-700 hover:border-emerald-300 dark:hover:border-emerald-600"
                                         onClick={() => {
                                             if (amount <= 0 || isNaN(amount*1000)) {
                                                 setAmountError("Please enter a valid amount greater than 0.");
@@ -176,7 +190,7 @@ export default function PayPage() {
                                         }}
                                     >
                                         Send Money
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                         </div>
