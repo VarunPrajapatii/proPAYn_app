@@ -1,5 +1,19 @@
+import Button from "@propayn/ui/button";
+import { useRouter } from "next/navigation";
 
-const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, provider: string) => void}) => {
+const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, provider: string)=> Promise<string | { message: string }>}) => {
+    const router = useRouter();
+
+    const handleClick = async () => {
+        const response = await onPay(amount, "CreditCard");
+        if (typeof response === "string") {
+            router.push(response);
+        } else {
+            alert(`Payment initiation failed. Please try again: ${response.message}`);
+            console.error(response.message);
+        }
+    }
+
     return (
         <div>
             <div className="p-6 w-full max-w-2xl h-80 backdrop-blur-xl bg-black/25 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg shadow-black/20">
@@ -139,23 +153,17 @@ const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                 </div>
             </div>
             <div>
-                <button
-                    type="button"
-                    onClick={() => {
-                        onPay(amount, "CreditCard");
-                    }}
-                    className=" mt-5 px-20 py-2 text-lg font-semibold rounded-2xl bg-gradient-to-r from-gray-500/60 via-green-500/60 to-emerald-400/60 text-white 
-                    shadow-lg shadow-indigo-200/30 dark:shadow-indigo-800/30 border-none outline-none 
-                    transition-all duration-200 hover:from-indigo-600/60 hover:to-emerald-500/50 hover:scale-105 
-                     focus:ring-offset-white dark:focus:ring-offset-zinc-900"
+                <Button 
+                    className='mt-4 rounded-2xl backdrop-blur-xl bg-emerald-500/20 dark:bg-emerald-400/20 border-2 border-emerald-500/30 dark:border-emerald-400/30 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-500/30 dark:hover:bg-emerald-400/30 hover:scale-105 shadow-lg hover:shadow-emerald-500/20'
+                    onClick={handleClick}
                 >
                     <span className="inline-flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.623 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                         </svg>
                         Verify & Pay
                     </span>
-                </button>
+                </Button>
             </div>
         </div>
     )

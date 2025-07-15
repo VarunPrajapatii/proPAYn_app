@@ -1,4 +1,4 @@
-import { on } from 'events';
+import Button from '@propayn/ui/button';
 import { useRouter } from 'next/navigation';
 import  { useEffect, useState, useRef } from 'react';
 
@@ -6,6 +6,7 @@ const banks = ["SBI", "HDFC", "ICICI", "AXIS"];
 
 const NetBanking = ({amount, onPay}: {amount: number, onPay: (amount: number, provider: string)=> Promise<string | { message: string }>}) => {
     const [open, setOpen] = useState(false);
+    const [disabled, setDisabled] = useState(true);
     const [selected, setSelected] = useState<string>("");
     const dropdownRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
@@ -61,6 +62,7 @@ const NetBanking = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                                                 type="button"
                                                 onClick={() => {
                                                     setSelected(bank);
+                                                    setDisabled(false);
                                                     setOpen(false);
                                                 }}
                                                 className="w-full text-left block px-5 py-2 rounded-lg transition-all duration-150 hover:bg-white/70 hover:backdrop-blur-md hover:font-semibold dark:hover:bg-zinc-800/80 dark:hover:text-indigo-400"
@@ -72,19 +74,20 @@ const NetBanking = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                                 </ul>
                             </div>
                         )}
-
-                        <button
-                            type="button"
+                        <br/>
+                        <Button 
+                            className='mt-4 rounded-2xl backdrop-blur-xl bg-emerald-500/20 dark:bg-emerald-400/20 border-2 border-emerald-500/30 dark:border-emerald-400/30 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-500/30 dark:hover:bg-emerald-400/30 hover:scale-105 shadow-lg hover:shadow-emerald-500/20'
                             onClick={handleClick}
-                            className="mt-8 px-10 py-2 text-lg font-bold rounded-2xl bg-gradient-to-r from-indigo-500/60 via-blue-500/60 to-emerald-400/60 text-white shadow-lg shadow-indigo-200/30 border-none outline-none transition-all duration-200 hover:from-indigo-600/60 hover:to-emerald-500/50 hover:scale-105 focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-zinc-900"
+                            disabled={disabled}
                         >
                             <span className="inline-flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
                                 </svg>
                                 Proceed Securely
                             </span>
-                        </button>
+                        </Button>
+
                     </div>
                 </div>
             </div>

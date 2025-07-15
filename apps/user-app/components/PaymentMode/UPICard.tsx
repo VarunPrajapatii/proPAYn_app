@@ -1,9 +1,12 @@
+import Button from '@propayn/ui/button';
+import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 
-const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provider: string) => void}) => {
+const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provider: string)=> Promise<string | { message: string }>}) => {
     const [selectedUPIApp, setSelectedUPIApp] = useState<string | null>(null);
     const [upiError, setUpiError] = useState<string>('');
     const upiIdRef = useRef<HTMLInputElement>(null);
+    const router = useRouter();
     const upiApps = [
         { name: 'PhonePe', logo: '/logos/phonepe_logo.png' },
         { name: 'GPay', logo: '/logos/gpay_logo.png' },
@@ -13,6 +16,17 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
 
     // UPI ID validation regex
     const upiRegex = /^[a-z0-9.\-]+@[a-z0-9]+$/;
+
+    const handleClick = async (amount: number, provider: string) => {
+        const response = await onPay(amount, provider);
+        if (typeof response === "string") {
+            router.push(response);
+        } else {
+            alert(`Payment initiation failed. Please try again: ${response.message}`);
+            console.error(response.message);
+        }
+    }
+
 
     return (
         <div>
@@ -100,23 +114,19 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
                         </div>
 
                         {/* Verify & Pay Button */}
-                        <button
-                            type="button"
+                        <Button
+                            className=" rounded-2xl backdrop-blur-xl bg-emerald-500/20 dark:bg-emerald-400/20 border-2 border-emerald-500/30 dark:border-emerald-400/30 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-500/30 dark:hover:bg-emerald-400/30 hover:scale-105 shadow-lg hover:shadow-emerald-500/20"
                             onClick={() => {
                                 const upiId = upiIdRef.current?.value.trim() || '';
                                 if (upiId) {
-                                    upiRegex.test(upiId) ? onPay(amount, "UPIid") : setUpiError('Enter a valid UPI ID.');
+                                    upiRegex.test(upiId) ? handleClick(amount, "UPIid") : setUpiError('Enter a valid UPI ID.');
                                 } else if(selectedUPIApp) {
-                                    onPay(amount, selectedUPIApp);
+                                    handleClick(amount, selectedUPIApp);
                                 } else {
                                     setUpiError('Enter a valid UPI ID or select a UPI app.');
                                     return
                                 }
                             }}
-                            className="w-full py-2 text-lg font-semibold rounded-2xl bg-gradient-to-r from-indigo-500 via-blue-500 to-emerald-400 text-white 
-                                     shadow-lg shadow-indigo-200/30 dark:shadow-indigo-800/30 border-none outline-none 
-                                     transition-all duration-200 hover:from-indigo-600 hover:to-emerald-500 hover:scale-105 
-                                     focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-zinc-900"
                         >
                             <span className="inline-flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -124,7 +134,7 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
                                 </svg>
                                 Verify & Pay
                             </span>
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </div>
