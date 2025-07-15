@@ -194,7 +194,7 @@ app.post("/initiate", async (req, res) => {
         message: "Payment initiated",
         paymentSessionId : paymentSession.id,
         sessionToken: paymentSession.session_token,
-        checkoutUrl: `${process.env.PG_URL}/checkout?sessionId=${paymentSession.id}`, 
+        checkoutUrl: `${process.env.PG_URL}/checkout?sessionId=${paymentSession.id}&provider=${body.provider}`, 
     });
 })
 
@@ -284,6 +284,7 @@ app.post("/bankWebhook", async (req, res) => {
 
 app.get('/checkout', (req, res) => {
     const { sessionId } = req.query;
+    const { provider } = req.query;
     res.send(`
         <!DOCTYPE html>
         <html>
@@ -293,7 +294,7 @@ app.get('/checkout', (req, res) => {
                 body { 
                     font-family: Arial, sans-serif; 
                     text-align: center; 
-                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    background: linear-gradient(135deg, #1c254e 0%, #4f2f6e 100%);
                     color: white;
                     margin: 0;
                     padding: 100px 20px;
@@ -330,7 +331,7 @@ app.get('/checkout', (req, res) => {
             </div>
             <script>
                 setTimeout(() => {
-                    window.location.href = '${process.env.BANK_SERVICE_URL}/checkout?sessionId=${sessionId}';
+                    window.location.href = '${process.env.BANK_SERVICE_URL}/checkout?sessionId=${sessionId}&provider=${provider}';
                 }, 2000);
             </script>
         </body>

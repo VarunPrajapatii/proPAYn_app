@@ -98,7 +98,7 @@ function generateSignature(payload: any, secret: string): string {
 
 const OnRampRequestSchema = z.object({
     amount: z.number().min(10000).max(10000000), // ₹1,000 to ₹1,00,000
-    provider: z.enum(['HDFC', 'SBI', 'ICICI', 'AXIS'])
+    provider: z.enum(['HDFC', 'SBI', 'ICICI', 'AXIS', 'CreditCard', 'UPIid', 'PhonePe', 'GPay', 'Paytm', 'BHIMUPI'])
 });
 
 export async function POST(req: NextRequest) {
@@ -118,7 +118,7 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         if (error instanceof z.ZodError) {
             return NextResponse.json({ 
-                message: "Max One Lakh allowed",
+                message: `${amount} or ${provider} is not valid`,
                 errors: error.issues
             }, { status: 400 });
         }
