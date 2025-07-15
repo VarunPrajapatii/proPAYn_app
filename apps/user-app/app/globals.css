@@ -38,3 +38,48 @@
 .animate-loop-vertically {
   animation: loop-vertically 30s linear infinite;
 }
+
+
+
+
+/* @keyframes loop-vertically {
+  0% {
+    transform: translateY(0%) translateZ(0);
+  }
+  100% {
+    transform: translateY(-50%) translateZ(0);
+  }
+} */
+
+/* .animate-loop-vertically {
+  animation: loop-vertically 30s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+} */
+
+/* Performance optimizations */
+/* .gradients-container {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+} */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .animate-loop-vertically {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  
+  .moving-circle,
+  .moving-circle-small {
+    animation: none !important;
+  }
+}
+
+/* GPU acceleration for images */
+.image-container {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}

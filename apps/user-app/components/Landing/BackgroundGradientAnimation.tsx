@@ -1,5 +1,5 @@
 'use client';
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { clsx } from 'clsx';
@@ -46,7 +46,6 @@ const BackgroundGradientAnimation: React.FC<BackgroundGradientAnimationProps> = 
   const [tgX, setTgX] = useState(0);
   const [tgY, setTgY] = useState(0);
 
-  // Define color schemes based on dark mode from Jotai store
   const colorSchemes = {
     light: {
       gradientBackgroundStart: gradientBackgroundStart || 'rgb(248, 250, 252)', // slate-50
@@ -69,17 +68,33 @@ const BackgroundGradientAnimation: React.FC<BackgroundGradientAnimationProps> = 
   const currentScheme = isDarkMode ? colorSchemes.dark : colorSchemes.light;
 
   useEffect(() => {
-    function move() {
-      if (!interactiveRef.current) {
-        return;
+    let animationId: number;
+    
+    function animate() {
+      if (interactiveRef.current) {
+        setCurX(prev => prev + (tgX - prev) / 20);
+        setCurY(prev => prev + (tgY - prev) / 20);
       }
-      setCurX(curX + (tgX - curX) / 20);
-      setCurY(curY + (tgY - curY) / 20);
+      animationId = requestAnimationFrame(animate);
+    }
+    
+    if (interactive) {
+      animationId = requestAnimationFrame(animate);
+    }
+    
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
+  }, [interactive, tgX, tgY]);
+
+  // Separate useEffect for DOM updates
+  useEffect(() => {
+    if (interactiveRef.current) {
       interactiveRef.current.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
     }
-
-    move();
-  }, [tgX, tgY, curX, curY]);
+  }, [curX, curY]);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (interactiveRef.current) {
@@ -105,14 +120,61 @@ const BackgroundGradientAnimation: React.FC<BackgroundGradientAnimationProps> = 
     '--blending-value': blendingValue,
   } as React.CSSProperties;
 
+  // Added CSS optimizations to gradient container
+  const optimizedStyles = {
+    willChange: 'transform',
+    transform: 'translateZ(0)', // Force hardware acceleration
+    backfaceVisibility: 'hidden' as const,
+  };
+
+  // Added intersection observer to only animate, when in viewport
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    
+    if (interactiveRef.current) {
+      observer.observe(interactiveRef.current);
+    }
+    
+    return () => observer.disconnect();
+  }, []);
+
+  // Added throttling to mouse move handler, for smootheness
+  const throttledMouseMove = useCallback(
+    throttle((event: React.MouseEvent<HTMLDivElement>) => {
+      if (interactiveRef.current) {
+        const rect = interactiveRef.current.getBoundingClientRect();
+        setTgX(event.clientX - rect.left);
+        setTgY(event.clientY - rect.top);
+      }
+    }, 16), // ~60fps
+    []
+  );
+
+  // Helper throttle function
+  function throttle(func: Function, limit: number) {
+    let inThrottle: boolean;
+    return function(this: any, ...args: any[]) {
+      if (!inThrottle) {
+        func.apply(this, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    }
+  }
+
   return (
     <div
       className={cn(
-        'h-screen w-[99vw] z-0 relative overflow-hidden top-0 left-0 bg-[linear-gradient(40deg,var(--gradient-background-start),var(--gradient-background-end))]',
+        'scroll-smooth h-[110vh] w-[99vw] z-0 relative overflow-hidden top-0 left-0 bg-[linear-gradient(40deg,var(--gradient-background-start),var(--gradient-background-end))]',
         containerClassName
       )}
       style={styleVars}
-      onMouseMove={handleMouseMove}
+      onMouseMove={throttledMouseMove}
     >
       <svg className="hidden">
         <defs>
@@ -138,6 +200,7 @@ const BackgroundGradientAnimation: React.FC<BackgroundGradientAnimationProps> = 
           'gradients-container h-full w-full blur-lg',
           isSafari ? 'blur-2xl' : '[filter:url(#blurMe)_blur(40px)]'
         )}
+        style={optimizedStyles}
       >
         <div
           className={cn(

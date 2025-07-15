@@ -1,14 +1,15 @@
 import BackgroundGradientAnimation from "./BackgroundGradientAnimation";
+import GetStartedButton from "./GetStartedButton";
 
 const Title1 = () => {
     return (
         <BackgroundGradientAnimation size="100%">
-            <div className="relative z-10 h-screen w-screen flex flex-col items-center justify-center px-4">
-                <div className="text-center max-w-6xl mx-auto">
+            <div className="scroll-smooth relative z-10 h-screen w-screen flex flex-col items-center justify-center px-4">
+                <div className="text-center max-w-7xl mx-auto">
                     {/* Main heading */}
-                    <div className="space-y-4">
+                    <div className="space-y-6 mb-8">
                         {/* First line */}
-                        <div className="flex flex-wrap items-center justify-center gap-2 text-xl lg:text-5xl md:text-4xl font-bold">
+                        <div className="flex flex-wrap items-center justify-center gap-3 text-2xl lg:text-6xl md:text-5xl font-bold leading-tight">
                             <span className="text-slate-800 dark:text-neutral-100">
                                 This is proPAYn app, for
                             </span>
@@ -21,27 +22,34 @@ const Title1 = () => {
                         </div>
                         
                         {/* Second line */}
-                        <div className="flex flex-wrap items-center justify-center gap-2 text-xl lg:text-5xl md:text-4xl font-bold">
-                            <span className="text-slate-800 dark:text-neutral-100 pb-1.5">
+                        <div className="flex flex-wrap items-center justify-center gap-3 text-2xl lg:text-6xl md:text-5xl font-bold leading-tight">
+                            <span className="text-slate-800 dark:text-neutral-100">
                                 safely
                             </span>
-                            <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300 pb-1.5">
+                            <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300">
                                 adding Funds
                             </span>
-                            <span className="text-slate-800 dark:text-neutral-100 pb-1.5">
+                            <span className="text-slate-800 dark:text-neutral-100">
                                 with ease
                             </span>
                         </div>
                     </div>
                     
-                    {/* Optional subtitle */}
-                    <div className="mt-8 text-lg md:text-xl text-neutral-500 dark:text-neutral-400 font-medium">
-                        India's Most-loved Payments App
+                    {/* Enhanced subtitle section */}
+                    <div className="space-y-4 mb-12">
+                        <div className="text-xl md:text-2xl lg:text-3xl text-neutral-600 dark:text-neutral-300 font-semibold">
+                            India's Most-loved Payments App
+                        </div>
+                        <div className="text-base md:text-lg text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+                            Experience seamless digital payments with built-in wallet, UPI integration, and instant peer-to-peer transfers powered by our in-house payment gateway
+                        </div>
                     </div>
-                    <div className="mt-10">
-                        <button className="px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 dark:from-cyan-500 dark:via-blue-500 dark:to-purple-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                            Get Started
-                        </button>
+                    
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <GetStartedButton>Get Started</GetStartedButton>
+                        <div className="text-sm text-neutral-400 dark:text-neutral-500">
+                            Demo project made by <span className="font-semibold text-neutral-500">Varun Prajapati</span> • Banks and all transactions simulated
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,4 +58,3 @@ const Title1 = () => {
 }
 
 export default Title1;
-
