@@ -24,6 +24,8 @@ export default function PayPage() {
     const [transactions, setTransactions] = useState<P2PTransactions[]>([]);
     const [amountError, setAmountError] = useState("");
     const [numberError, setNumberError] = useState("");
+    const [isSending, setIsSending] = useState(false);
+    const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
 
     const { isAuthenticated, isLoading } = useRequireAuth();
     if (isLoading) {
@@ -37,6 +39,7 @@ export default function PayPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setIsLoadingTransactions(true);
                 const balanceData = await getBalance();
                 setBalance(balanceData);
 
@@ -45,28 +48,65 @@ export default function PayPage() {
 
             } catch (error) {
                 console.error("Failed to fetch data", error);
+            } finally {
+                setIsLoadingTransactions(false);
             }
         };
 
         fetchData();
     }, []);
 
-    const handleSend = () => {
+    const handleSend = async () => {
         let valid = true;
+        
+        // Reset all errors
+        setAmountError("");
+        setNumberError("");
+        
         if (amount <= 0) {
             setAmountError("Enter a valid amount.");
             valid = false;
-        } else {
-            setAmountError("");
         }
+        
         if (number.length !== 10) {
             setNumberError("Enter a valid 10-digit phone number.");
             valid = false;
-        } else {
-            setNumberError("");
         }
+        
+        // Check if user has sufficient balance
+        if (amount * 100 > balance.amount) {
+            setAmountError("Not enough balance! Available balance: ₹" + (balance.amount / 100));
+            valid = false;
+        }
+        
         if (valid) {
-            p2pTransfer(number, amount * 100);
+            setIsSending(true);
+            try {
+                const result = await p2pTransfer(number, amount * 100);
+                
+                if (result?.message) {
+                    // Handle server-side error messages
+                    if (result.message === "User not found") {
+                        setNumberError("User with this phone number not found.");
+                    } else {
+                        setAmountError(result.message);
+                    }
+                    setIsSending(false);
+                } else {
+                    // Success - refresh the page after 2 seconds
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
+                }
+            } catch (error: any) {
+                console.error("Transfer failed:", error);
+                if (error.message === "Insufficient funds") {
+                    setAmountError("Insufficient funds in your account.");
+                } else {
+                    setAmountError("Transfer failed. Please try again.");
+                }
+                setIsSending(false);
+            }
         }
     };
 
@@ -181,6 +221,7 @@ export default function PayPage() {
                                 <div className="flex justify-center mt-8">
                                     <Button
                                         className="!font-bold rounded-2xl bg-emerald-200/50 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-100 dark:hover:bg-emerald-800 hover:scale-105 shadow-lg border-2 border-emerald-200 dark:border-emerald-700 hover:border-emerald-300 dark:hover:border-emerald-600"
+                                        disabled={isSending}
                                         onClick={() => {
                                             if (amount <= 0 || isNaN(amount*1000)) {
                                                 setAmountError("Please enter a valid amount greater than 0.");
@@ -189,7 +230,33 @@ export default function PayPage() {
                                             handleSend();
                                         }}
                                     >
-                                        Send Money
+                                        {isSending ? (
+                                            <div className="flex items-center justify-center space-x-2">
+                                                <svg 
+                                                    className="animate-spin h-5 w-5 text-emerald-900 dark:text-emerald-100" 
+                                                    xmlns="http://www.w3.org/2000/svg" 
+                                                    fill="none" 
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <circle 
+                                                        className="opacity-25" 
+                                                        cx="12" 
+                                                        cy="12" 
+                                                        r="10" 
+                                                        stroke="currentColor" 
+                                                        strokeWidth="4"
+                                                    />
+                                                    <path 
+                                                        className="opacity-75" 
+                                                        fill="currentColor" 
+                                                        d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                                    />
+                                                </svg>
+                                                <span>Sending...</span>
+                                            </div>
+                                        ) : (
+                                            "Send Money"
+                                        )}
                                     </Button>
                                 </div>
                             </div>
@@ -203,9 +270,35 @@ export default function PayPage() {
                             </div>
                             <div className="flex-1 overflow-y-auto max-h-[66vh] px-6 pb-6">
                                 {
-                                    (!transactions.length) ? 
-                                        <div className="text-xl font-bold text-center mt-8">No Transactions</div>
-                                    : transactions.map((t, idx) => <P2pTxnLists key={idx} transaction={t} />)
+                                    isLoadingTransactions ? (
+                                        <div className="flex flex-col items-center justify-center mt-12 space-y-4">
+                                            <svg 
+                                                className="animate-spin h-8 w-8 text-black dark:text-white" 
+                                                xmlns="http://www.w3.org/2000/svg" 
+                                                fill="none" 
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <circle 
+                                                    className="opacity-25" 
+                                                    cx="12" 
+                                                    cy="12" 
+                                                    r="10" 
+                                                    stroke="currentColor" 
+                                                    strokeWidth="4"
+                                                />
+                                                <path 
+                                                    className="opacity-75" 
+                                                    fill="currentColor" 
+                                                    d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                                />
+                                            </svg>
+                                            <div className="text-lg font-medium text-black/70 dark:text-white/70">Loading Transactions...</div>
+                                        </div>
+                                    ) : (
+                                        (!transactions.length) ? 
+                                            <div className="text-xl font-bold text-center mt-8">No Transactions</div>
+                                        : transactions.map((t, idx) => <P2pTxnLists key={idx} transaction={t} />)
+                                    )
                                 }
                             </div>
                         </div>

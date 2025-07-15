@@ -21,6 +21,7 @@ export default function TransferPage() {
     const [balance, setBalance] = useState({ amount: 0, locked: 0 });
     const [transactions, setTransactions] = useState<OnRampTransaction[]>([]);
     const [isValidAmount, setIsValidAmount] = useState(false);
+    const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
     const router = useRouter();
     const { isAuthenticated, isLoading } = useRequireAuth();
     if (isLoading) {
@@ -34,6 +35,7 @@ export default function TransferPage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setIsLoadingTransactions(true);
                 const balanceData = await getBalance();
                 setBalance(balanceData);
 
@@ -41,6 +43,8 @@ export default function TransferPage() {
                 setTransactions(transactionsData);
             } catch (error) {
                 console.error("Failed to fetch data", error);
+            } finally {
+                setIsLoadingTransactions(false);
             }
         };
         fetchData();
@@ -157,9 +161,35 @@ export default function TransferPage() {
                                 </div>
                                 <div className="flex-1 overflow-y-auto max-h-[66vh] px-6 pb-6">
                                     {
-                                        (!transactions.length) ? 
-                                            <div className="text-xl font-bold text-center mt-8 text-black dark:text-white/70">No Transactions</div>
-                                        : transactions.map((t, index) => <OnRampTxnlist key={index} transaction={t} />)
+                                        isLoadingTransactions ? (
+                                            <div className="flex flex-col items-center justify-center mt-12 space-y-4">
+                                                <svg 
+                                                    className="animate-spin h-8 w-8 text-black dark:text-white" 
+                                                    xmlns="http://www.w3.org/2000/svg" 
+                                                    fill="none" 
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <circle 
+                                                        className="opacity-25" 
+                                                        cx="12" 
+                                                        cy="12" 
+                                                        r="10" 
+                                                        stroke="currentColor" 
+                                                        strokeWidth="4"
+                                                    />
+                                                    <path 
+                                                        className="opacity-75" 
+                                                        fill="currentColor" 
+                                                        d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                                    />
+                                                </svg>
+                                                <div className="text-lg font-medium text-black/70 dark:text-white/70">Loading Transactions...</div>
+                                            </div>
+                                        ) : (
+                                            (!transactions.length) ? 
+                                                <div className="text-xl font-bold text-center mt-8 text-black dark:text-white/70">No Transactions</div>
+                                            : transactions.map((t, index) => <OnRampTxnlist key={index} transaction={t} />)
+                                        )
                                     }
                                 </div>
                             </div>
