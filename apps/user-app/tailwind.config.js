@@ -17,6 +17,11 @@ module.exports = {
           light: '#508C9B',
         },
       },
+      fontFamily: {
+        poppins: ['var(--font-poppins)', 'sans-serif'],
+        nunito: ['var(--font-nunito)', 'serif'],
+        jetbrains: ['var(--font-jetbrains)', 'monospace'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(circle at center, var(--tw-gradient-stops))',
       },

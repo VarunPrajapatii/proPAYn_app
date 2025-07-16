@@ -42,7 +42,7 @@ const NetBanking = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                 <div className="p-6 w-full h-80 text-black dark:text-white  backdrop-blur-xl bg-black/15 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg flex items-center justify-center ">
                     <div className="mx-20 my-4 relative inline-block text-left" ref={dropdownRef}>
                         <button
-                            className="py-2 px-8 font-semibold text-xl border border-gray-500 dark:border-gray-400 rounded-2xl focus:border-gray-300 dark:focus:border-gray-600 focus:text-gray-600 dark:focus:text-gray-300 text-center transition-colors duration-300 inline-flex items-center hover:bg-gray-100 dark:hover:bg-zinc-800 hover:border-gray-700 dark:hover:border-gray-300"
+                            className="font-nunito py-2 px-8 font-semibold text-xl border border-gray-500 dark:border-gray-400 rounded-2xl focus:border-gray-300 dark:focus:border-gray-600 focus:text-gray-600 dark:focus:text-gray-300 text-center transition-colors duration-300 inline-flex items-center hover:bg-gray-100 dark:hover:bg-zinc-800 hover:border-gray-700 dark:hover:border-gray-300"
                             type="button"
                             onClick={() => setOpen((prev) => !prev)}
                         >

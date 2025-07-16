@@ -104,7 +104,7 @@ export default function AuthForm() {
       </div>
 
       {message && (
-        <div className="text-red-600 text-sm" role="alert">
+        <div className="font-nunito text-red-600 text-sm" role="alert">
           {message}
         </div>
       )}

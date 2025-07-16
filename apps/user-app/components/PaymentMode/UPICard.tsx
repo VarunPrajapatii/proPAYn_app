@@ -34,7 +34,7 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
                 <div className="flex h-full">
                     {/* QR Code Section */}
                     <div className="flex-1 flex flex-col items-center justify-center pr-6">
-                        <h3 className="text-lg font-semibold mb-4">Scan QR Code</h3>
+                        <h3 className="font-poppins text-lg font-semibold mb-4">Scan QR Code</h3>
                         
                         {/* Dummy QR Code */}
                         <div className="w-32 h-32 bg-white rounded-lg p-2 shadow-md mb-4">
@@ -50,7 +50,7 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
                             </div>
                         </div>
                         
-                        <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
+                        <p className="font-nunito text-sm text-gray-600 dark:text-gray-300 text-center">
                             Open any UPI app to scan and pay
                         </p>
                     </div>
@@ -60,7 +60,7 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
 
                     {/* UPI Apps & Manual Entry Section */}
                     <div className="flex-1 flex flex-col pl-6">
-                        <h3 className="font-semibold mb-3">Choose UPI App</h3>
+                        <h3 className="font-poppins font-semibold mb-3">Choose UPI App</h3>
                         
                         {/* UPI Apps Grid */}
                         <div className="grid grid-cols-2 gap-3 mb-4">

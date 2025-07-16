@@ -36,7 +36,7 @@ export default function PaymentMode() {
                         {/* Payment Mode Selection */}
                         <div className="p-6 w-80 h-[32rem] absolute top-32 left-32 backdrop-blur-xl bg-black/15 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg shadow-black/20">
                             <div>
-                                <h3 className="text-xl font-light mt-16 mb-4">Payment Mode</h3>
+                                <h3 className="font-poppins text-xl font-light mt-16 mb-4">Payment Mode</h3>
                                 <nav className="">
                                     <div className="space-y-2">
                                         {['Credit/Debit Card', 'Net Banking', 'UPI'].map((page) => (
@@ -73,8 +73,8 @@ export default function PaymentMode() {
 
                         {/* Payment Amount */}
                         <div className="flex items-center ml-[2rem] justify-center w-[50rem] h-16 absolute top-40 left-[28rem] backdrop-blur-xl bg-black/15 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg shadow-black/20">
-                            <div className="text-xl">
-                                Total payment to be made: <span className="font-bold text-3xl text-red-500">{amount}</span> INR
+                            <div className="font-nunito text-xl">
+                                Total payment to be made: <span className="font-jetbrains font-bold text-3xl text-red-500">{amount}</span> INR
                             </div>
                         </div>
 

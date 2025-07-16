@@ -34,16 +34,16 @@ export default function P2pTxnLists({
                                 </div>
                             </div>
                             <div className="pt-1">
-                                <div className="font-light text-md">
+                                <div className="font-nunito font-light text-md">
                                     {(transaction.transactionType == "Credit") ? "Credit to Wallet" : "Debited from Wallet"}
                                 </div>
-                                <div className="font-semibold text-xl">{(transaction.transactionType === "Credit") ? "From": "Sent To"}: +91 {transaction.relatedUser_no}</div>
-                                <div>
+                                <div className="font-poppins font-semibold text-xl">{(transaction.transactionType === "Credit") ? "From": "Sent To"}: +91 {transaction.relatedUser_no}</div>
+                                <div className="font-nunito">
                                     {transaction.time.toDateString()}
                                 </div>
                             </div>
                         </div>
-                        <div className={`px-8 py-10 text-xl font-bold ${(transaction.transactionType === "Credit") ? "text-green-600" : "text-red-600"}`}>
+                        <div className={`px-8 py-10 text-xl font-jetbrains font-bold ${(transaction.transactionType === "Credit") ? "text-green-600" : "text-red-600"}`}>
                             {(transaction.transactionType === "Credit") ? "+": ""}{transaction.amount / 100}
                         </div>
                     </div>

@@ -31,31 +31,31 @@ export default function OnRampTxnlist({
                         </div>
                     </div>
                     <div className="pt-1">
-                        <div className="font-bold text-lg">
+                        <div className="font-poppins font-bold text-lg">
                             Added to ProPAYn account
                         </div>
                         {
                             (transaction.status === "Processing") 
                             ? 
-                                (<div className="font-extralight text-sm">From: {transaction.provider} 
-                                    <span className="font-semibold text-yellow-600">(Processing)</span>
+                                (<div className="font-nunito font-extralight text-sm">From: {transaction.provider} 
+                                    <span className="font-nunito font-semibold text-yellow-600">(Processing)</span>
                                 </div>) 
                             : 
                                 ((transaction.status === "Failure")
                                 ?
-                                    (<div className="font-base text-sm">From: {transaction.provider} <span className="font-semibold text-red-600">(Failure)</span></div>)
+                                    (<div className="font-nunito font-base text-sm">From: {transaction.provider} <span className="font-nunito font-semibold text-red-600">(Failure)</span></div>)
                                 :
-                                    (<div className="font-base text-sm">From: {transaction.provider} <span className="font-semibold text-green-600">(Success)</span></div>)
+                                    (<div className="font-nunito font-base text-sm">From: {transaction.provider} <span className="font-nunito font-semibold text-green-600">(Success)</span></div>)
                                 )
                         }
                         
-                        <div>
+                        <div className="font-nunito">
                             {transaction.time.toDateString()}
                         </div>
                     </div>
                 </div>
-                <div className="px-5 py-7 text-xl  font-semibold">
-                    ₹{transaction.amount / 100}
+                <div className="px-5 py-7 text-2xl font-jetbrains font-semibold">
+                    <span className='text-base'>₹{""}</span>{transaction.amount / 100}
                 </div>
             </div>
             <div className="border border-y-gray-400 mx-8">

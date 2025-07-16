@@ -49,7 +49,7 @@ export function PasswordInput({ value, onChange, disabled, passwordConditions }:
 
   return (
     <div>
-      <label htmlFor="password" className="block text-sm font-medium text-gray-800 dark:text-gray-300  mb-2">
+      <label htmlFor="password" className="font-nunito block text-sm font-medium text-gray-800 dark:text-gray-300  mb-2">
         Password
       </label>
       <div className="relative">
@@ -60,7 +60,7 @@ export function PasswordInput({ value, onChange, disabled, passwordConditions }:
           disabled={disabled}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="flex h-10 w-full rounded-md border border-gray-500/30 bg-white/5 px-3 py-2 text-sm text-black dark:text-white placeholder:text-gray-300 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:cursor-not-allowed disabled:opacity-50 tracking-wider"
+          className="font-jetbrains flex h-10 w-full rounded-md border border-gray-500/30 bg-white/5 px-3 py-2 text-sm text-black dark:text-white placeholder:text-gray-300 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:cursor-not-allowed disabled:opacity-50 tracking-wider"
         />
         <button
           type="button"
@@ -70,7 +70,7 @@ export function PasswordInput({ value, onChange, disabled, passwordConditions }:
           {passwordVisible ? <EyeOffIcon /> : <EyeIcon />}
         </button>
       </div>
-      <div className="text-gray-800 dark:text-gray-400  text-sm mt-2">
+      <div className="font-nunito text-gray-800 dark:text-gray-400  text-sm mt-2">
         <ul className="pl-2 space-y-1">
           <li className="flex items-center gap-x-2">
             <span className={passwordConditions.hasUpperLower ? "text-green-600" : "text-gray-800 dark:text-gray-400"}>

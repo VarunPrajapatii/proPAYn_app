@@ -54,7 +54,7 @@ export default function TransferPage() {
         <div className="">
             <div className="min-h-screen pt-24 px-8 bg-transparent text-black dark:text-white">
                 <div className="max-w-7xl mx-auto">
-                    <h1 className="font-bold text-3xl text-center mb-10 text-black dark:text-white">Money Transfer</h1>
+                    <h1 className="font-poppins font-bold text-3xl text-center mb-10 text-black dark:text-white">Money Transfer</h1>
                     <div className="flex flex-col lg:flex-row gap-8">
                         {/* Wallet Balance Card */}
                         <div className="lg:w-1/2 w-full">
@@ -67,27 +67,27 @@ export default function TransferPage() {
                                         <path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L80 128c-8.8 0-16-7.2-16-16s7.2-16 16-16l368 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L64 32zM416 272a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
                                     </svg>
                                     <div>
-                                        <div className="font-extrabold text-3xl text-black dark:text-white">
-                                            ₹ {balance.amount / 100}
+                                        <div className="font-jetbrains font-extrabold text-3xl text-black dark:text-white">
+                                            <span className='text-xl'>₹{" "}</span>{balance.amount / 100}
                                         </div>
-                                        <div className="font-light text-sm text-black/70 dark:text-white/70">
+                                        <div className="font-nunito font-light text-sm text-black/70 dark:text-white/70">
                                             Your Wallet Balance
                                         </div>
                                     </div>
                                 </div>
                                 <div className="mt-8">
                                     <div className="mt-8 w-full h-20">
-                                        <div className="text-sm font-semibold h-[20%] text-black dark:text-white">Amount</div>
+                                        <div className="font-nunito text-sm font-semibold h-[20%] text-black dark:text-white">Amount</div>
                                         <div className="h-[80%] pt-2 text-4xl relative group">
                                             {/* Rupee icon */}
-                                            <span className="absolute left-0 top-1/2 -translate-y-1/2 text-2xl text-black/60 dark:text-white/60 pl-1 pointer-events-none select-none">
-                                                ₹
+                                            <span className="font-jetbrains absolute left-0 top-1/2 -translate-y-1/2 text-2xl text-black/60 dark:text-white/60 pl-1 pointer-events-none select-none">
+                                                <span className='text-2xl'>₹{" "}</span>
                                             </span>
                                             <input
                                                 type="number"
                                                 pattern="^\d{0,6}(\.\d{0,2})?$"
                                                 // 6 digits + dot + up to 2 decimals, but not zero after decimal
-                                                className="pl-8 w-[80%] bg-transparent text-black dark:text-white placeholder-black/40 dark:placeholder-white/40 outline-none border-none transition-all duration-300
+                                                className="font-jetbrains pl-8 w-[80%] bg-transparent text-black dark:text-white placeholder-black/40 dark:placeholder-white/40 outline-none border-none transition-all duration-300
                                                     [&::-webkit-outer-spin-button]:appearance-none
                                                     [&::-webkit-inner-spin-button]:appearance-none
                                                     appearance-none
@@ -131,7 +131,7 @@ export default function TransferPage() {
                                                 "
                                             />
                                             {amountError && (
-                                                <div className="text-xs font-semibold text-red-500 dark:text-red-400 mt-5">{amountError}</div>
+                                                <div className="font-nunito text-xs font-semibold text-red-500 dark:text-red-400 mt-5">{amountError}</div>
                                             )}
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@ export default function TransferPage() {
                         {/* Bank to Wallet Transfer List */}
                         <div className="lg:w-1/2 w-full flex flex-col">
                             <div className="backdrop-blur-xl bg-black/10 dark:bg-white/10 rounded-2xl border-2 border-black/15 dark:border-white/15 shadow-lg flex flex-col h-full">
-                                <div className="flex justify-center pt-6 pb-2 text-2xl font-semibold text-black dark:text-white">
+                                <div className="font-poppins flex justify-center pt-6 pb-2 text-2xl font-semibold text-black dark:text-white">
                                     Bank to Wallet Transfers
                                 </div>
                                 <div className="flex-1 overflow-y-auto max-h-[66vh] px-6 pb-6">
@@ -183,11 +183,11 @@ export default function TransferPage() {
                                                         d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                                                     />
                                                 </svg>
-                                                <div className="text-lg font-medium text-black/70 dark:text-white/70">Loading Transactions...</div>
+                                                <div className="font-nunito text-lg font-medium text-black/70 dark:text-white/70">Loading Transactions...</div>
                                             </div>
                                         ) : (
                                             (!transactions.length) ? 
-                                                <div className="text-xl font-bold text-center mt-8 text-black dark:text-white/70">No Transactions</div>
+                                                <div className="font-poppins text-xl font-bold text-center mt-8 text-black dark:text-white/70">No Transactions</div>
                                             : transactions.map((t, index) => <OnRampTxnlist key={index} transaction={t} />)
                                         )
                                     }

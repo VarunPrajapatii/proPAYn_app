@@ -86,8 +86,8 @@ const BackgroundBeams = () => {
             key={`path-${index}`}
             d={path}
             stroke={`url(#linearGradient-${index})`}
-            strokeOpacity="0.4"
-            strokeWidth="0.5"
+            strokeOpacity="0.5"
+            strokeWidth="0.7"
             style={{ willChange: 'stroke' }}
           />
         ))}
@@ -110,10 +110,10 @@ const BackgroundBeams = () => {
                 y2: ['0%', `${93 + Math.random() * 8}%`],
               }}
               transition={{
-                duration: Math.random() * 8 + 6, // Reduced duration
-                ease: 'linear', // Changed to linear for better performance
+                duration: Math.random() * 8 + 6,
+                ease: 'linear',
                 repeat: Infinity,
-                delay: Math.random() * 4, // Reduced delay
+                delay: Math.random() * 1, // Reduced delay
               }}
             >
               <stop stopColor="#18CCFC" stopOpacity="0" />

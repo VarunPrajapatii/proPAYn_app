@@ -29,12 +29,12 @@ const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
 
                 {/* Card Number */}
                 <div className=" mt-8 w-full h-20  ">
-                    <div className="text-sm font-semibold h-[20%]">Card Number</div>
+                    <div className="font-nunito text-sm font-semibold h-[20%]">Card Number</div>
                     <div className="h-[80%] pt-2 text-4xl relative group">
                         <input
                             type="text"
                             maxLength={19}
-                            className="w-[80%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300"
+                            className="font-jetbrains w-[80%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300"
                             placeholder="1234 1234 1234 1234"
                             onInput={e => {
                                 const input = e.currentTarget;
@@ -58,11 +58,11 @@ const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                 <div className="w-full h-10 mt-8 grid grid-cols-12 ">
                     {/* Card Holder Name */}
                     <div className="col-span-6 ">
-                        <div className="text-sm font-semibold h-[20%]">Card Holder</div>
+                        <div className="font-nunito text-sm font-semibold h-[20%]">Card Holder</div>
                         <div className="h-[80%] pt-1.5 text-2xl relative group">
                             <input
                                 type="text"
-                                className="w-[90%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300 border-black"
+                                className="font-jetbrains w-[90%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300 border-black"
                                 placeholder="VARUN KUMAR"
                                 onInput={e => {
                                     const input = e.currentTarget;
@@ -82,12 +82,12 @@ const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                     </div>
                     {/* Card Expiry Date */}
                     <div className="col-span-3 ">
-                        <div className="text-sm font-semibold h-[20%]">Exp. Date</div>
+                        <div className="font-nunito text-sm font-semibold h-[20%]">Exp. Date</div>
                         <div className="h-[80%] pt-1.5 text-2xl relative group">
                             <input
                                 type="text"
                                 maxLength={5}
-                                className="w-[80%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300"
+                                className="font-jetbrains w-[80%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300"
                                 placeholder="05/24"
                                 onInput={e => {
                                     let value = e.currentTarget.value.replace(/\D/g, '');
@@ -128,12 +128,12 @@ const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                     </div>
                     {/* Card CVV */}
                     <div className="col-span-3 ">
-                        <div className="text-sm font-semibold h-[20%]">CVV</div>
+                        <div className="font-nunito text-sm font-semibold h-[20%]">CVV</div>
                         <div className="h-[80%] pt-1.5 text-2xl relative group">
                             <input
                                 type="text"
                                 maxLength={3}
-                                className="w-full bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300"
+                                className="font-jetbrains w-full bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300"
                                 placeholder="000"
                                 onInput={e => {
                                     const input = e.currentTarget;

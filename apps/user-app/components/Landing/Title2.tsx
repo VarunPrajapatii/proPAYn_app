@@ -58,10 +58,10 @@ export default function Title2() {
       <header className="z-20 grid grid-cols-1 gap-y-16 pt-16 md:grid-flow-row md:pt-24 lg:grid-flow-col lg:grid-cols-2 lg:items-center lg:pt-0 h-full w-full max-w-7xl mx-auto px-6">
         <div className="max-w-[42rem] justify-self-start lg:justify-self-end lg:pr-12">
           <div className="space-y-8">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 via-blue-600 to-purple-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300 leading-tight">
+            <h1 className="font-poppins text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 via-blue-600 to-purple-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300 leading-tight">
               {heading}
             </h1>
-            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+            <p className="font-nunito text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
               {description}
             </p>
             
@@ -69,23 +69,23 @@ export default function Title2() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-6">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full"></div>
-                <span className="text-sm md:text-base text-slate-600 dark:text-slate-300">UPI & Card Integration</span>
+                <span className="font-nunito text-sm md:text-base text-slate-600 dark:text-slate-300">UPI & Card Integration</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-                <span className="text-sm md:text-base text-slate-600 dark:text-slate-300">Instant P2P Transfers</span>
+                <span className="font-nunito text-sm md:text-base text-slate-600 dark:text-slate-300">Instant P2P Transfers</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
-                <span className="text-sm md:text-base text-slate-600 dark:text-slate-300">In-house Gateway</span>
+                <span className="font-nunito text-sm md:text-base text-slate-600 dark:text-slate-300">In-house Gateway</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-gradient-to-r from-teal-500 to-blue-500 rounded-full"></div>
-                <span className="text-sm md:text-base text-slate-600 dark:text-slate-300">Bank-grade Security</span>
+                <span className="font-nunito text-sm md:text-base text-slate-600 dark:text-slate-300">Bank-grade Security</span>
               </div>
             </div>
             
-            <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 dark:text-neutral-100">
+            <div className="font-poppins text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 dark:text-neutral-100">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-cyan-400 dark:via-blue-400 dark:to-purple-400">
                 Spending it?
               </span>

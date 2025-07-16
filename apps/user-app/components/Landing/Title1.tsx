@@ -7,13 +7,13 @@ const Title1 = () => {
             <div className="scroll-smooth relative z-10 h-screen w-screen flex flex-col items-center justify-center px-4">
                 <div className="text-center max-w-7xl mx-auto">
                     {/* Main heading */}
-                    <div className="space-y-6 mb-8">
+                    <div className="space-y-6 mb-8 font-poppins ">
                         {/* First line */}
-                        <div className="flex flex-wrap items-center justify-center gap-3 text-2xl lg:text-6xl md:text-5xl font-bold leading-tight">
+                        <div className="flex flex-wrap items-center justify-center gap-3 text-2xl lg:text-5xl md:text-5xl font-semibold leading-tight">
                             <span className="text-slate-800 dark:text-neutral-100">
                                 This is proPAYn app, for
                             </span>
-                            <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300">
+                            <span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300">
                                 peer-to-peer transfer
                             </span>
                             <span className="text-slate-800 dark:text-neutral-100">
@@ -22,7 +22,7 @@ const Title1 = () => {
                         </div>
                         
                         {/* Second line */}
-                        <div className="flex flex-wrap items-center justify-center gap-3 text-2xl lg:text-6xl md:text-5xl font-bold leading-tight">
+                        <div className="flex flex-wrap items-center justify-center gap-3 text-2xl lg:text-5xl md:text-5xl font-semibold leading-tight">
                             <span className="text-slate-800 dark:text-neutral-100">
                                 safely
                             </span>
@@ -37,15 +37,13 @@ const Title1 = () => {
                     
                     {/* Enhanced subtitle section */}
                     <div className="space-y-4 mb-12">
-                        <div className="text-xl md:text-2xl lg:text-3xl text-neutral-600 dark:text-neutral-300 font-semibold">
-                            India's Most-loved Payments App
-                        </div>
+                        
                         <div className="text-base md:text-lg text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
                             Experience seamless digital payments with built-in wallet, UPI integration, and instant peer-to-peer transfers powered by our in-house payment gateway
                         </div>
                     </div>
                     
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div className="flex font-nunito flex-col sm:flex-row items-center justify-center gap-4">
                         <GetStartedButton>Get Started</GetStartedButton>
                         <div className="text-sm text-neutral-400 dark:text-neutral-500">
                             Demo project made by <span className="font-semibold text-neutral-500">Varun Prajapati</span> • Banks and all transactions simulated
