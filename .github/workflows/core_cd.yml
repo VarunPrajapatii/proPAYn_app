@@ -1,0 +1,22 @@
+name: Deploy Core apps - user-app, propayn-gateway and bank-simulator
+on:
+  push:
+    branches: [ main ]
+
+
+jobs:
+  redeploy_core:
+    runs-on: ubuntu-latest
+    name: Redeploy user, propayn-gateway, bank-simulator
+    steps:
+      - run: |
+          echo "${{ env.PROPAYN_SSH_KEY }}" &> ~/.ssh/propayn_key
+          echo "${{ env.KNOWN_HOSTS }}" &> ~/.ssh/known_hosts
+          ssh -i ~/.ssh/propayn_key ubuntu@${{ env.PROPAYN_HOST_IP }}
+          cd proPAYn_app && git pull
+          npm run db:migrate
+          npm run db:generate
+          npm install
+          npm run build
+          pm2 reload ecosystem.config.js
+          echo "Deployment complete!"
