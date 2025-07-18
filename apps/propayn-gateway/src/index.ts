@@ -365,7 +365,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', service: 'bank-simulator' });
 });
 
-const PORT = process.env.PORT || 3010;
+const PORT = process.env.PORT || 4010;
 app.listen(PORT, () => {
   console.log(`Bank Simulator running on port ${PORT}`);
 });
