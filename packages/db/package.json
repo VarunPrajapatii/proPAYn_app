@@ -1,9 +1,12 @@
 {
   "name": "@propayn/db",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./index.ts",
+  "types": "./index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +19,9 @@
     "./client": "./index.ts"
   },
   "devDependencies": {
+    "@propayn/typescript-config": "*",
     "@types/node": "^22.1.0",
     "prisma": "^5.18.0",
-    "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
 }

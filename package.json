@@ -1,13 +1,20 @@
 {
   "name": "propayn",
   "private": true,
+  "version": "1.0.0",
+  "description": "ProPAYn - Digital Payment Platform",
+  "author": "Varun Prajapati",
+  "license": "MIT",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "db:generate": "cd packages/db && npx prisma generate && cd ../..",
-    "start-user-app": "cd ./apps/user-app && npm run start"
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "db:generate": "turbo db:generate",
+    "db:migrate": "turbo db:migrate",
+    "db:studio": "turbo db:studio",
+    "clean": "turbo clean",
+    "type-check": "turbo type-check"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
@@ -15,7 +22,8 @@
     "typescript": "^5.4.5"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "npm": ">=8"
   },
   "packageManager": "npm@10.8.1",
   "workspaces": [

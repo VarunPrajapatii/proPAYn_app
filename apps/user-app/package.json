@@ -9,6 +9,7 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@propayn/db": "*",
     "@propayn/store": "*",
     "@propayn/ui": "*",
     "@types/bcrypt": "^5.0.2",
@@ -19,7 +20,7 @@
     "jotai": "^2.12.5",
     "jsonwebtoken": "^9.0.2",
     "motion": "^12.23.5",
-    "next": "^14.1.1",
+    "next": "^14.2.5",
     "next-auth": "^4.24.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -28,8 +29,8 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.1",
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@propayn/eslint-config": "*",
+    "@propayn/typescript-config": "*",
     "@types/eslint": "^8.56.5",
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.61",

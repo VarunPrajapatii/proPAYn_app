@@ -1,15 +1,27 @@
 {
   "name": "@propayn/bank-simulator",
   "version": "1.0.0",
-  "description": "",
+  "description": "ProPAYn Bank Simulator - Mock banking backend for testing",
   "main": "index.js",
   "scripts": {
     "build": "npx esbuild ./src/index.ts --bundle --platform=node --outfile=dist/index.js",
     "start": "node dist/index.js",
-    "dev": "npm run build && npm run start"
+    "dev": "npm run build && npm run start",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "axios": "^1.10.0"
+  },
+  "devDependencies": {
+    "@propayn/typescript-config": "*",
+    "@types/express": "^4.17.21",
+    "esbuild": "^0.23.0",
+    "typescript": "^5.4.5"
+  },
+  "keywords": ["banking", "simulator", "mock", "testing"],
+  "author": "Varun Prajapati",
+  "license": "MIT",
   "type": "commonjs"
 }
