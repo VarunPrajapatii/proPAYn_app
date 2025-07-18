@@ -33,8 +33,13 @@ export default async function RootLayout({children,}: {children: React.ReactNode
                     : stored === 'dark';
                   if (isDark) {
                     document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
                   }
-                } catch (e) {}
+                } catch (e) {
+                  // Fallback to light mode if there's an error
+                  document.documentElement.classList.remove('dark');
+                }
               })();
             `,
           }}
@@ -52,9 +57,9 @@ export default async function RootLayout({children,}: {children: React.ReactNode
                   <div className="moving-circle absolute h-[400px] w-[400px] rounded-full bg-gradient-to-br from-gray-300 via-gray-400 to-slate-500 dark:from-blue-500/70 dark:via-blue-700/70 dark:to-purple-500 opacity-60 top-[20px] -left-[50px]" />
                   <div className="moving-circle-small absolute h-[300px] w-[300px] rounded-full bg-gradient-to-br from-gray-300 via-gray-400 to-slate-500 dark:from-blue-500/50 dark:via-blue-700/50 dark:to-purple-500/60 opacity-60 bottom-[40px] -right-[100px]" />
                 </div>
-                <Header />
-                {children}
               </div>
+              <Header />
+              {children}
             </div>
           </Mode>
         </body>

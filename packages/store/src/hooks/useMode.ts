@@ -1,12 +1,26 @@
 import { useAtom } from "jotai";
 import { useEffect } from "react";
-import { modeAtom } from "../atoms/mode";
+import { themeSyncAtom } from "../atoms/mode";
 
 export const useMode = () => {
-    const [isDarkMode, setIsDarkMode] = useAtom(modeAtom);
+    const [isDarkMode, setIsDarkMode] = useAtom(themeSyncAtom);
+    
+    // Ensure DOM is synchronized on mount and when mode changes
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        
+        // Apply theme immediately
+        if (isDarkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [isDarkMode]);
     
     // Listen for system theme changes
     useEffect(() => {
+        if (typeof window === 'undefined') return;
+        
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         
         const handleChange = (e: MediaQueryListEvent) => {
@@ -22,7 +36,8 @@ export const useMode = () => {
     }, [setIsDarkMode]);
     
     const toggleMode = () => {
-        setIsDarkMode(prev => !prev);
+        const newValue = !isDarkMode;
+        setIsDarkMode(newValue);
     };
     
     const setLightMode = () => {
@@ -34,6 +49,7 @@ export const useMode = () => {
     };
     
     const setSystemMode = () => {
+        if (typeof window === 'undefined') return;
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         setIsDarkMode(systemDark);
     };
