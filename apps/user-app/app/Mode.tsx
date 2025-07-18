@@ -88,7 +88,7 @@ const Mode = ({ children }: { children: React.ReactNode }) => {
                     {/* Tooltip */}
                     <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                         <div className="bg-black dark:bg-white text-white dark:text-black text-xs px-2 py-1 rounded whitespace-nowrap">
-                            {isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                            {isDarkMode ? 'Switch to light mode and refresh the page' : 'Switch to dark mode and refresh the page'}
                         </div>
                         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45 w-2 h-2 bg-black dark:bg-white"></div>
                     </div>
