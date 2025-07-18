@@ -11,7 +11,9 @@ jobs:
     steps:
       - run: |
           echo "${{ env.PROPAYN_SSH_KEY }}" &> ~/.ssh/propayn_key
-          echo "${{ env.KNOWN_HOSTS }}" &> ~/.ssh/known_hosts
+          mkdir -p /home/runner/.ssh/
+          touch /home/runner/.ssh/known_hosts
+          echo "${{ env.KNOWN_HOSTS }}" &> /home/runner/ssh/known_hosts
           ssh -i ~/.ssh/propayn_key ubuntu@${{ env.PROPAYN_HOST_IP }}
           cd proPAYn_app && git pull
           npm run db:migrate
