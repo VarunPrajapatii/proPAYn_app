@@ -11,14 +11,8 @@ jobs:
     steps:
       - run: |
           mkdir -p ~/.ssh
-          echo "${{ env.PROPAYN_SSH_KEY }}" > ~/.ssh/propayn_key
+          echo "${{ secrets.PROPAYN_SSH_KEY }}" > ~/.ssh/propayn_key
           chmod 600 ~/.ssh/propayn_key
           echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-          ssh -T -i ~/.ssh/propayn_key ubuntu@52.66.59.220
-          cd proPAYn_app && git pull
-          npm run db:migrate
-          npm run db:generate
-          npm install
-          npm run build
-          pm2 reload ecosystem.config.js
+          ssh -T -i ~/.ssh/propayn_key ubuntu@${{ secrets.PROPAYN_HOST_IP }} -t "cd proPAYn_app && git pull && npm run db:migrate && npm run db:generate && npm install && npm run build && pm2 reload ecosystem.config.js"
           echo "Deployment complete!"
