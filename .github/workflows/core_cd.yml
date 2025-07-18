@@ -14,7 +14,7 @@ jobs:
           echo "${{ env.PROPAYN_SSH_KEY }}" > ~/.ssh/propayn_key
           chmod 600 ~/.ssh/propayn_key
           echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-          ssh -i ~/.ssh/propayn_key ubuntu@${{ env.PROPAYN_HOST_IP }}
+          ssh -T -i ~/.ssh/propayn_key ubuntu@52.66.59.220
           cd proPAYn_app && git pull
           npm run db:migrate
           npm run db:generate
