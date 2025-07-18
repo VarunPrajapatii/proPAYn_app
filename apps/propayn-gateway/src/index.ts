@@ -166,7 +166,7 @@ app.post("/initiate", async (req, res) => {
         }
     }).catch(error => console.error("Error sending request to bank:", error));
 
-    console.log("Bank Response", bank_response ? bank_response.data : "No response from bank");
+    // console.log("Bank Response", bank_response ? bank_response.data : "No response from bank");
 
     if(bank_response) {
         try {
@@ -188,7 +188,7 @@ app.post("/initiate", async (req, res) => {
         });
     }
 
-    console.log("checkoutUrl", `${process.env.PG_URL}/checkout?sessionId=${paymentSession.id}`)
+    // console.log("checkoutUrl", `${process.env.PG_URL}/checkout?sessionId=${paymentSession.id}`)
 
     res.status(200).json({
         message: "Payment initiated",
@@ -352,7 +352,7 @@ app.get('/redirect', async (req, res) => {
     }
 
     const redirectUrl = paymentSession.callbackUrl;
-    console.log("Redirecting to:", redirectUrl);
+    // console.log("Redirecting to:", redirectUrl);
 
     // redirect to the original URL
     res.redirect(`${redirectUrl}?txn_id=${paymentSession.merchantTxnId}&status=${paymentSession.status}&sessionId=${sessionId}`);
@@ -361,11 +361,11 @@ app.get('/redirect', async (req, res) => {
 
 
 app.get('/health', (req, res) => {
-    console.log("Health check endpoint hit");
+    // console.log("Health check endpoint hit");
   res.json({ status: 'healthy', service: 'bank-simulator' });
 });
 
 const PORT = process.env.PORT || 4010;
 app.listen(PORT, () => {
-  console.log(`Propayn Gateway running on port ${PORT}`);
+//   console.log(`Propayn Gateway running on port ${PORT}`);
 });

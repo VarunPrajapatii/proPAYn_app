@@ -12,7 +12,7 @@ export async function createOnRampTransaction(amount: number, provider: string) 
     }
 
     try {
-        console.log("Creating OnRamp Transaction for amount:", amount, "provider:", provider);
+        // console.log("Creating OnRamp Transaction for amount:", amount, "provider:", provider);
         const response = await fetch(`${process.env.NEXTAUTH_URL}/api/v1/onRamp/initiate`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Cookie': cookieHeader },
@@ -21,7 +21,7 @@ export async function createOnRampTransaction(amount: number, provider: string) 
 
         const data = await response.json();
 
-        console.log("OnRamp Transaction Response:", data);
+        // console.log("OnRamp Transaction Response:", data);
         
         if (data?.redirectUrl) {
             return data.redirectUrl;

@@ -29,7 +29,7 @@ export async function getTxnDetails(txn_id: string): Promise<TxnDetails | null> 
       }
     });
     
-    console.log("Transaction details fetched:", dbTxn);
+    // console.log("Transaction details fetched:", dbTxn);
 
     if (!dbTxn) {
       return null;

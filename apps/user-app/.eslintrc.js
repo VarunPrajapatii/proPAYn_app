@@ -16,7 +16,8 @@ module.exports = {
           'PAYMENT_GATEWAY_URL',
           'PAYMENT_GATEWAY_API_KEY',
           'PAYMENT_GATEWAY_SECRET',
-          'SESSION_SECRET'
+          'SESSION_SECRET',
+          'NEXTAUTH_SECRET'
         ],
       },
     ],

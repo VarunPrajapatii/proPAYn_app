@@ -10,7 +10,6 @@ export const authOptions = {
     ],
     callbacks: {
       async signIn({ user, account }: any) {
-        console.log("hi signin")
         if (!user || !user.email) {
           return false;
         }

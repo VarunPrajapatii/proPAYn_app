@@ -23,7 +23,7 @@ const Header = () => {
     router.push('/auth/signin')
   }
 
-  console.log("session log from header: ", session, status)
+  // console.log("session log from header: ", session, status)
 
   return (
     <div className="fixed top-2 left-1/2 transform -translate-x-1/2 w-[95%] max-w-6xl z-50">

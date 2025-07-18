@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
 
     const signature = generateSignature(gateway_payload, process.env.PAYMENT_GATEWAY_SECRET as string);
     try {
-        console.log("Sending request to payment gateway");
+        // console.log("Sending request to payment gateway");
         const gateway_response = await axios.post(`${process.env.PAYMENT_GATEWAY_URL}/initiate`, gateway_payload, {
             headers: {
                 'content-type': 'application/json',
@@ -99,7 +99,7 @@ export async function POST(req: NextRequest) {
             }
         })
 
-        console.log("Gateway response:", gateway_response.data);
+        // console.log("Gateway response:", gateway_response.data);
 
         await prisma.onRampTransaction.update({
             where: { txn_id },

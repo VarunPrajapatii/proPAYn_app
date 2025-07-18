@@ -85,8 +85,8 @@ export const getBalance = async () => {
 
 export const getOnRampTransactions = async () => {
     const session = await getAuthSession();
-    console.log("session when fetching on-ramp transactions:", session);
-    console.log("session when fetching on-ramp transactions:", session?.user?.id);
+    // console.log("session when fetching on-ramp transactions:", session);
+    // console.log("session when fetching on-ramp transactions:", session?.user?.id);
 
     if (!session || !session.user?.id) {
         throw new Error("Unauthorized access: No valid session found.");
