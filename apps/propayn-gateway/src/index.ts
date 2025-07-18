@@ -367,5 +367,5 @@ app.get('/health', (req, res) => {
 
 const PORT = process.env.PORT || 4010;
 app.listen(PORT, () => {
-  console.log(`Bank Simulator running on port ${PORT}`);
+  console.log(`Propayn Gateway running on port ${PORT}`);
 });
