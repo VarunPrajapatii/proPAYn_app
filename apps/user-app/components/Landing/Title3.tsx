@@ -5,7 +5,7 @@ const Title3 = () => {
         <div className="h-[130vh] flex justify-between bg-gradient-to-b from-slate-50 to-slate-100 dark:from-black dark:to-gray-900 pt-20 pb-10">
             <div className="pl-12 lg:pl-20 flex items-center">
                 <Image
-                    src={"/images/title3.png"}
+                    src={"/images/title3.jpg"}
                     height={600}
                     width={600}
                     alt="ProPAYn mobile app interface"
@@ -18,8 +18,8 @@ const Title3 = () => {
                         Pay Friends
                     </div>
                     <div className="font-nunito font-semibold text-lg md:text-xl lg:text-2xl text-slate-600 dark:text-slate-300 leading-relaxed">
-                        ProPAYn helps settling up feel more like catching up.<br />
-                        Send and receive money with ProPAYn friends to split <br />
+                        proPAYn helps settling up feel more like catching up.<br />
+                        Send and receive money with proPAYn friends to split <br />
                         everyday necessities, bills, and shared activities like takeout or travel.
                     </div>
                     

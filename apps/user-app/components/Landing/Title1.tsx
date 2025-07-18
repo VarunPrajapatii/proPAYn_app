@@ -13,7 +13,7 @@ const Title1 = () => {
                             <span className="text-slate-800 dark:text-neutral-100">
                                 This is proPAYn app, for
                             </span>
-                            <span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300">
+                            <span className="pb-1.5 font-semibold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300">
                                 peer-to-peer transfer
                             </span>
                             <span className="text-slate-800 dark:text-neutral-100">
@@ -26,7 +26,7 @@ const Title1 = () => {
                             <span className="text-slate-800 dark:text-neutral-100">
                                 safely
                             </span>
-                            <span className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300">
+                            <span className="pb-1.5 font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300">
                                 adding Funds
                             </span>
                             <span className="text-slate-800 dark:text-neutral-100">

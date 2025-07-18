@@ -64,7 +64,7 @@ export const authOptions = {
     ],
     pages: {
       signIn: '/auth/signin',
-      error: '/auth/error',
+    //   error: '/auth/error',
     },
     secret: process.env.JWT_SECRET || "secret",
     callbacks: {

@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function Title2() {
   const heading = "Guard your finances with military-grade encryption";
-  const description = "Because your peace of mind is priceless. Experience the future of digital payments with ProPAYn - where security meets simplicity in perfect harmony.";
+  const description = "Because your peace of mind is priceless. Experience the future of digital payments with proPAYn - where security meets simplicity in perfect harmony.";
 
   const images = [
     {
@@ -86,13 +86,12 @@ export default function Title2() {
             </div>
             
             <div className="font-poppins text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 dark:text-neutral-100">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-cyan-400 dark:via-blue-400 dark:to-purple-400">
+              <div className="w-[65%] pb-1.5 bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-cyan-400 dark:via-blue-400 dark:to-purple-400">
                 Spending it?
-              </span>
-              <br />
-              <span className="text-slate-800 dark:text-neutral-100">
-                ProPAYn it!
-              </span>
+              </div>
+              <div className=" text-slate-800 dark:text-neutral-100">
+                proPAYn it!
+              </div>
             </div>
           </div>
         </div>

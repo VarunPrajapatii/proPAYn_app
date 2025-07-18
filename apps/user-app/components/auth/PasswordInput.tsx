@@ -49,7 +49,7 @@ export function PasswordInput({ value, onChange, disabled, passwordConditions }:
 
   return (
     <div>
-      <label htmlFor="password" className="font-nunito block text-sm font-medium text-gray-800 dark:text-gray-300  mb-2">
+      <label htmlFor="password" className="font-nunito block text-base font-medium text-gray-800 dark:text-gray-300  mb-2">
         Password
       </label>
       <div className="relative">
@@ -59,7 +59,11 @@ export function PasswordInput({ value, onChange, disabled, passwordConditions }:
           required
           disabled={disabled}
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          maxLength={15}
+          onChange={(e) => {
+        const newValue = e.target.value.slice(0, 15);
+        onChange(newValue);
+          }}
           className="font-jetbrains flex h-10 w-full rounded-md border border-gray-500/30 bg-white/5 px-3 py-2 text-sm text-black dark:text-white placeholder:text-gray-300 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-gray-400 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent disabled:cursor-not-allowed disabled:opacity-50 tracking-wider"
         />
         <button

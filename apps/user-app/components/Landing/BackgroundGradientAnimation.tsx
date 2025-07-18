@@ -50,10 +50,10 @@ const BackgroundGradientAnimation: React.FC<BackgroundGradientAnimationProps> = 
     light: {
       gradientBackgroundStart: gradientBackgroundStart || 'rgb(248, 250, 252)', // slate-50
       gradientBackgroundEnd: gradientBackgroundEnd || 'rgb(241, 245, 249)',   // slate-100
-      firstColor: firstColor || '148, 163, 184',                   // slate-400
-      secondColor: secondColor || '100, 116, 139',                  // slate-500
-      thirdColor: thirdColor || '71, 85, 105',                     // slate-600
-      pointerColor: pointerColor || '100, 116, 139',               // slate-500
+      firstColor: firstColor || '6, 95, 70',                  // blue-600
+      secondColor: secondColor || '15, 118, 110',                 // purple-500
+      thirdColor: thirdColor || '30, 64, 175',                 // sky-400
+      pointerColor: pointerColor || '34, 197, 94',               // violet/purple
     },
     dark: {
       gradientBackgroundStart: gradientBackgroundStart || 'rgb(33, 6, 46)', // purple-800
@@ -132,7 +132,10 @@ const BackgroundGradientAnimation: React.FC<BackgroundGradientAnimationProps> = 
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
+      ([entry]) => {
+        if(entry)
+          setIsInView(entry.isIntersecting);
+      },
       { threshold: 0.1 }
     );
     

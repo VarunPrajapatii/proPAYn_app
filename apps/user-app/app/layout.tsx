@@ -43,17 +43,18 @@ export default async function RootLayout({children,}: {children: React.ReactNode
       <Providers session={session}>
         <body className={inter.className}>
           <Mode>
-            <div className={`min-w-screen`}>
-              <Header />
+            <div className={`min-w-screen relative`}>
               <div className="hidden lg:block">
+                {/* Background visible on all screen sizes */}
                 <div className="w-screen min-h-screen fixed bg-gradient-to-br from-white/90 to-white/95 -z-50 dark:from-zinc-800 dark:to-black"></div>
-                <div className="-z-50 absolute h-[240px] w-[650px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div className="hidden lg:block -z-50 absolute h-[240px] w-[650px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                   {/* circles added with vanilla as motion cant be used as server comp */}
-                  <div className="moving-circle absolute h-[400px] w-[400px] rounded-full bg-gradient-to-br from-gray-300 via-gray-400 to-slate-500 dark:from-emerald-700 dark:via-emerald-800 dark:to-slate-700 opacity-60 top-[20px] -left-[50px]" />
-                  <div className="moving-circle-small absolute h-[300px] w-[300px] rounded-full bg-gradient-to-br from-gray-300 via-gray-400 to-slate-500 dark:from-emerald-700 dark:via-emerald-800 dark:to-slate-700 opacity-60 bottom-[40px] -right-[100px]" />
+                  <div className="moving-circle absolute h-[400px] w-[400px] rounded-full bg-gradient-to-br from-gray-300 via-gray-400 to-slate-500 dark:from-blue-500/70 dark:via-blue-700/70 dark:to-purple-500 opacity-60 top-[20px] -left-[50px]" />
+                  <div className="moving-circle-small absolute h-[300px] w-[300px] rounded-full bg-gradient-to-br from-gray-300 via-gray-400 to-slate-500 dark:from-blue-500/50 dark:via-blue-700/50 dark:to-purple-500/60 opacity-60 bottom-[40px] -right-[100px]" />
                 </div>
+                <Header />
+                {children}
               </div>
-              {children}
             </div>
           </Mode>
         </body>

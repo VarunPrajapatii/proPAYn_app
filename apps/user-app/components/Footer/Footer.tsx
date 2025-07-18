@@ -115,8 +115,8 @@ const Footer = () => {
                     <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                         <div className="text-sm text-slate-500 dark:text-slate-400 text-center md:text-left">
                             <p>
-                                Made with ❤️ by{" "}
-                                <span className="font-medium text-slate-700 dark:text-slate-300">Varun Prajapati</span>
+                                Made by{" "}
+                                <a href="https://portfolio.varuntd.com" className="font-medium text-slate-700 dark:text-slate-300 hover:underline">Varun Prajapati</a>
                             </p>
                             <p className="mt-1">
                                 All transactions are simulated for demo purposes • © 2025 proPAYn, Inc.

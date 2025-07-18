@@ -111,9 +111,9 @@ export default function AuthForm() {
 
       <Button
         disabled={!isFormValid() || loader}
-        className="!w-full !py-1.5 rounded-xl bg-gradient-to-r from-purple-50 to-violet-50 dark:from-purple-900 dark:to-violet-900 text-purple-900 dark:text-purple-100 hover:from-slate-100 hover:via-blue-100 hover:to-indigo-200 dark:hover:from-purple-800 dark:hover:to-violet-800 hover:scale-105 shadow-lg border border-purple-300 dark:border-purple-600"
+        className="!w-full !py-1.5 rounded-xl bg-gradient-to-r from-purple-50 to-violet-50 dark:from-slate-800 dark:via-blue-900 dark:to-purple-900 dark:text-white disabled:text-white hover:from-slate-100 hover:via-blue-100 hover:to-indigo-200 dark:hover:from-purple-800 dark:hover:to-violet-800 hover:scale-105 shadow-lg border border-purple-300 dark:border-purple-600"
       >
-        {loader ? <CustomLoader /> : 'Sign In'}
+        {loader ? <CustomLoader /> : 'Click to Sign In/Sign Up'}
       </Button>
     </form>
   );
