@@ -10,11 +10,11 @@ jobs:
     name: Redeploy user, propayn-gateway, bank-simulator
     steps:
       - run: |
-          echo "${{ env.PROPAYN_SSH_KEY }}" &> ~/.ssh/propayn_key
+          echo "${{ env.PROPAYN_SSH_KEY }}" &> /home/runner/.ssh/propayn_key
           mkdir -p /home/runner/.ssh/
           touch /home/runner/.ssh/known_hosts
-          echo "${{ env.KNOWN_HOSTS }}" &> /home/runner/ssh/known_hosts
-          ssh -i ~/.ssh/propayn_key ubuntu@${{ env.PROPAYN_HOST_IP }}
+          echo "${{ env.KNOWN_HOSTS }}" &> /home/runner/.ssh/known_hosts
+          ssh -i /home/runner/.ssh/propayn_key ubuntu@${{ env.PROPAYN_HOST_IP }}
           cd proPAYn_app && git pull
           npm run db:migrate
           npm run db:generate
