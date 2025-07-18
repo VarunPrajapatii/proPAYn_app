@@ -14,5 +14,7 @@ jobs:
           echo "${{ secrets.PROPAYN_SSH_KEY }}" > ~/.ssh/propayn_key
           chmod 600 ~/.ssh/propayn_key
           echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-          ssh -T -i ~/.ssh/propayn_key ubuntu@${{ secrets.PROPAYN_HOST_IP }} -t "cd proPAYn_app && git pull && npm run db:migrate && npm run db:generate && npm install && npm run build && pm2 reload ecosystem.config.js"
+          ssh -i ~/.ssh/propayn_key ubuntu@${{ secrets.PROPAYN_HOST_IP }} -t "export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && cd proPAYn_app && git pull origin production && npm run db:migrate && npm run db:generate && npm install && npm run build && pm2 reload ecosystem.config.js"
           echo "Deployment complete!"
