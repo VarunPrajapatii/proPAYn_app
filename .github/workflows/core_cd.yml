@@ -1,7 +1,7 @@
 name: Deploy Core apps - user-app, propayn-gateway and bank-simulator
 on:
   push:
-    branches: [ main ]
+    branches: [ production ]
 
 
 jobs:
