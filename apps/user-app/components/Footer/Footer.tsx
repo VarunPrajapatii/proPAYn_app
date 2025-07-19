@@ -119,7 +119,7 @@ const Footer = () => {
                                 <a href="https://portfolio.varuntd.com" className="font-medium text-slate-700 dark:text-slate-300 hover:underline">Varun Prajapati</a>
                             </p>
                             <p className="mt-1">
-                                All transactions are simulated for demo purposes • © 2025 proPAYn, Inc.
+                                All transactions are simulated for demo purposes • © 2025 proPAYn
                             </p>
                         </div>
                         <div className="flex items-center space-x-2 text-xs text-slate-400 dark:text-slate-500">
