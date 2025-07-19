@@ -46,7 +46,7 @@ const Title1 = () => {
                     <div className="flex font-nunito flex-col sm:flex-row items-center justify-center gap-4">
                         <GetStartedButton>Get Started</GetStartedButton>
                         <div className="text-sm text-neutral-400 dark:text-neutral-500">
-                            Demo project made by <a href="https://portfolio.varuntd.com" className="font-semibold hover:text-white dark:hover:text-black hover:underline text-neutral-500">Varun Prajapati</a> • Banks and all transactions simulated
+                            Demo project made by <a href="https://portfolio.varuntd.com" className="font-semibold hover:text-black dark:hover:text-white hover:scale-110 hover:underline text-neutral-500">Varun Prajapati</a> • Banks and all transactions simulated
                         </div>
                     </div>
                 </div>
