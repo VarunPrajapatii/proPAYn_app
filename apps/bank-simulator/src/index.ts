@@ -299,5 +299,5 @@ app.get('/health', (req, res) => {
 
 const PORT = process.env.PORT || 4020;
 app.listen(PORT, () => {
-//   console.log(`Bank Simulator running on port ${PORT}`);
+  console.log(`Bank Simulator running on port ${PORT}`);
 });
