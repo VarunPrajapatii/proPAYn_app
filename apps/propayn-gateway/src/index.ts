@@ -362,10 +362,10 @@ app.get('/redirect', async (req, res) => {
 
 app.get('/health', (req, res) => {
     // console.log("Health check endpoint hit");
-  res.json({ status: 'healthy', service: 'bank-simulator' });
+  res.json({ status: 'healthy', service: 'propayn-gateway' });
 });
 
 const PORT = process.env.PORT || 4010;
 app.listen(PORT, () => {
-//   console.log(`Propayn Gateway running on port ${PORT}`);
+  console.log(`Propayn Gateway running on port ${PORT}`);
 });
