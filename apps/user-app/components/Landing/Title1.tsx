@@ -7,13 +7,13 @@ const Title1 = () => {
             <div className="scroll-smooth relative z-10 h-screen w-screen flex flex-col items-center justify-center px-4 mt-10 sm:mt-0">
                 <div className="text-center max-w-7xl mx-auto">
                     {/* Main heading */}
-                    <div className="space-y-6 mb-8 font-poppins ">
+                    <div className="space-y-4 sm:space-y-6 mb-8 font-poppins ">
                         {/* First line */}
                         <div className="flex flex-wrap items-center justify-center gap-3 text-2xl lg:text-5xl md:text-5xl font-semibold leading-tight">
                             <span className="text-slate-800 dark:text-neutral-100">
                                 This is proPAYn app, for
                             </span>
-                            <span className="pb-1.5 font-semibold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300">
+                            <span className="sm:pb-1.5 font-semibold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300">
                                 peer-to-peer transfer
                             </span>
                             <span className="text-slate-800 dark:text-neutral-100">
@@ -26,7 +26,7 @@ const Title1 = () => {
                             <span className="text-slate-800 dark:text-neutral-100">
                                 safely
                             </span>
-                            <span className="pb-1.5 font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300">
+                            <span className="sm:pb-1.5 font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 dark:from-blue-300 dark:via-purple-300 dark:to-pink-300">
                                 adding Funds
                             </span>
                             <span className="text-slate-800 dark:text-neutral-100">
