@@ -52,7 +52,7 @@ export default function TransferPage() {
 
     return (
         <div className="">
-            <div className="min-h-screen pt-24 px-8 bg-transparent text-black dark:text-white">
+            <div className="min-h-screen pt-36 sm:pt-24 px-8 bg-transparent text-black dark:text-white">
                 <div className="max-w-7xl mx-auto">
                     <h1 className="font-poppins font-bold text-3xl text-center mb-10 text-black dark:text-white">Money Transfer</h1>
                     <div className="flex flex-col lg:flex-row gap-8">
@@ -63,7 +63,7 @@ export default function TransferPage() {
                                     <svg 
                                         xmlns="http://www.w3.org/2000/svg" 
                                         viewBox="0 0 512 512"
-                                        className="w-12 h-12 mr-4 text-customBlue-mid dark:text-blue-400 fill-current">
+                                        className="w-12 h-12 mr-4 text-customBlue-mid dark:text-blue-500 fill-current">
                                         <path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L80 128c-8.8 0-16-7.2-16-16s7.2-16 16-16l368 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L64 32zM416 272a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
                                     </svg>
                                     <div>
@@ -135,7 +135,7 @@ export default function TransferPage() {
                                             )}
                                         </div>
                                     </div>
-                                    <div className="flex justify-center mt-8">
+                                    <div className="flex justify-center mt-2 sm:mt-8">
                                         <Button 
                                             className="!font-bold rounded-2xl bg-emerald-200/50 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-100 dark:hover:bg-emerald-800 hover:scale-105 shadow-lg border-2 border-emerald-200 dark:border-emerald-700 hover:border-emerald-300 dark:hover:border-emerald-600"
                                             disabled={!isValidAmount || !!amountError}
@@ -156,10 +156,10 @@ export default function TransferPage() {
                         {/* Bank to Wallet Transfer List */}
                         <div className="lg:w-1/2 w-full flex flex-col">
                             <div className="backdrop-blur-xl bg-black/10 dark:bg-white/10 rounded-2xl border-2 border-black/15 dark:border-white/15 shadow-lg flex flex-col h-full">
-                                <div className="font-poppins flex justify-center pt-6 pb-2 text-2xl font-semibold text-black dark:text-white">
+                                <div className="font-poppins flex justify-center pt-6 pb-2 text-xl md:text-2xl font-semibold text-black dark:text-white">
                                     Bank to Wallet Transfers
                                 </div>
-                                <div className="flex-1 overflow-y-auto max-h-[66vh] px-6 pb-6">
+                                <div className="flex-1 overflow-y-auto max-h-[66vh] px-1 sm:px-6 pb-6">
                                     {
                                         isLoadingTransactions ? (
                                             <div className="flex flex-col items-center justify-center mt-12 space-y-4">

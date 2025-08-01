@@ -72,7 +72,7 @@ export default function PaymentStatusPage() {
     const videoSrc = isSuccess ? "/success.mp4" : "/failure.mp4";
 
     return (
-        <div className="w-full h-screen flex items-center justify-center  p-4">
+        <div className="w-full h-screen flex items-center justify-center  p-4 pt-20 sm:pt-0">
             <div className="max-w-md w-full backdrop-blur-md rounded-2xl shadow-2xl border border-gray-500 overflow-hidden">
                 {/* status vid */}
                 <div className="bg-gradient-to-br from-gray-50/50 to-gray-100/50 dark:from-slate-100/80 dark:to-slate-200/80 p-8 text-center">

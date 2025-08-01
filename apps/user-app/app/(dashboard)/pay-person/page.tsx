@@ -17,7 +17,7 @@ type P2PTransactions = {
     relatedUser_no: string | null
 };
 
-export default function PayPage() {
+export default  function PayPage() {
     const [number, setNumber] = useState("");
     const [amount, setAmount] = useState(0);
     const [balance, setBalance] = useState({ amount: 0, locked: 0 });
@@ -27,7 +27,7 @@ export default function PayPage() {
     const [isSending, setIsSending] = useState(false);
     const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
 
-    const { isAuthenticated, isLoading } = useRequireAuth();
+    const { isAuthenticated, isLoading, session } = useRequireAuth();
     if (isLoading) {
         return <FullPageLoader />;
     }
@@ -35,6 +35,8 @@ export default function PayPage() {
     if (!isAuthenticated) {
         redirect('/auth/signin');
     }
+
+    const currentUserNumber = (session?.user as any)?.number;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,6 +72,12 @@ export default function PayPage() {
         
         if (number.length !== 10) {
             setNumberError("Enter a valid 10-digit phone number.");
+            valid = false;
+        }
+
+        // Check if user is trying to send money to themselves
+        if (number === currentUserNumber) {
+            setNumberError("You cannot send money to yourself.");
             valid = false;
         }
         
@@ -112,7 +120,7 @@ export default function PayPage() {
 
 
     return (
-        <div className="min-h-screen pt-24 px-8 bg-transparent text-black dark:text-white">
+        <div className="min-h-screen pt-36 sm:pt-24 px-8 bg-transparent text-black dark:text-white">
             <div className="max-w-7xl mx-auto">
                 <h1 className="font-poppins font-bold text-3xl text-center mb-10">Pay Friends</h1>
                 <div className="flex flex-col lg:flex-row gap-8">
@@ -179,7 +187,7 @@ export default function PayPage() {
                                 {/* Number Input */}
                                 <div className="mt-8 w-full h-20">
                                     <div className="font-nunito text-sm font-semibold h-[20%]">Number</div>
-                                    <div className="h-[80%] pt-2 text-4xl relative group">
+                                    <div className="h-[60%] sm:h-[80%] pt-2 text-2xl sm:text-4xl relative group">
                                         <span className="font-jetbrains absolute left-0 top-1/2 -translate-y-1/2 text-xl text-black/60 dark:text-white/60 pl-1 pointer-events-none select-none">
                                             +91
                                         </span>
@@ -198,6 +206,11 @@ export default function PayPage() {
                                                 if (/^\d{0,10}$/.test(value)) {
                                                     setNumber(value);
                                                     setNumberError("");
+                                                    
+                                                    // Check if user is trying to enter their own number
+                                                    if (value === currentUserNumber && value.length === 10) {
+                                                        setNumberError("You cannot send money to yourself.");
+                                                    }
                                                 } else if (value.length > 10) {
                                                     setNumberError("Phone number cannot exceed 10 digits.");
                                                 } else {
@@ -218,7 +231,7 @@ export default function PayPage() {
                                         <div className="font-nunito text-xs text-red-500 mt-1">{numberError}</div>
                                     )}
                                 </div>
-                                <div className="flex justify-center mt-8">
+                                <div className="flex justify-center mt-2 sm:mt-8">
                                     <Button
                                         className="!font-bold rounded-2xl bg-emerald-200/50 dark:bg-emerald-900 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-100 dark:hover:bg-emerald-800 hover:scale-105 shadow-lg border-2 border-emerald-200 dark:border-emerald-700 hover:border-emerald-300 dark:hover:border-emerald-600"
                                         disabled={isSending}
@@ -265,10 +278,10 @@ export default function PayPage() {
                     {/* Wallet Transfers List */}
                     <div className="lg:w-1/2 w-full flex flex-col">
                         <div className="backdrop-blur-xl bg-black/10 dark:bg-white/10 rounded-2xl border-2 border-black/15 dark:border-white/15 shadow-lg flex flex-col h-full">
-                            <div className="font-poppins flex justify-center pt-6 pb-2 text-2xl font-semibold">
+                            <div className="font-poppins flex justify-center pt-6 pb-2 text-xl md:text-2xl font-semibold">
                                 Wallet Transfers
                             </div>
-                            <div className="flex-1 overflow-y-auto max-h-[66vh] px-6 pb-6">
+                            <div className="flex-1 overflow-y-auto max-h-[66vh] px-1 sm:px-6 pb-6">
                                 {
                                     isLoadingTransactions ? (
                                         <div className="flex flex-col items-center justify-center mt-12 space-y-4">

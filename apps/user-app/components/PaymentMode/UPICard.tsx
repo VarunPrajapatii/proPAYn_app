@@ -30,14 +30,17 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
 
     return (
         <div>
-            <div className="p-4 w-[130%]  h-[110%] text-black dark:text-white backdrop-blur-xl bg-black/15 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg">
-                <div className="flex h-full">
+            <div className="p-4 sm:w-[130%] h-[110%] text-black dark:text-white backdrop-blur-xl bg-black/15 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg
+                            lg:p-4 lg:w-[130%] lg:h-[110%]
+                            md:p-3 md:w-full md:h-auto
+                            sm:p-4  sm:h-auto">
+                <div className="flex h-full lg:flex-row flex-col">
                     {/* QR Code Section */}
-                    <div className="flex-1 flex flex-col items-center justify-center pr-6">
-                        <h3 className="font-poppins text-lg font-semibold mb-4">Scan QR Code</h3>
+                    <div className="flex-1 flex flex-col items-center justify-center lg:pr-6 sm:pb-6">
+                        <h3 className="font-poppins text-lg font-semibold mb-4 lg:text-lg md:text-base sm:text-lg">Scan QR Code</h3>
                         
                         {/* Dummy QR Code */}
-                        <div className="w-32 h-32 bg-white rounded-lg p-2 shadow-md mb-4">
+                        <div className="w-32 h-32 bg-white rounded-lg p-2 shadow-md mb-4 lg:w-32 lg:h-32 md:w-24 md:h-24 sm:w-28 sm:h-28">
                             <div className="w-full h-full bg-black rounded grid grid-cols-8 gap-px p-1">
                                 {Array.from({ length: 64 }).map((_, i) => (
                                     <div
@@ -50,20 +53,20 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
                             </div>
                         </div>
                         
-                        <p className="font-nunito text-sm text-gray-600 dark:text-gray-300 text-center">
+                        <p className="font-nunito text-sm text-gray-600 dark:text-gray-300 text-center lg:text-sm md:text-xs sm:text-sm">
                             Open any UPI app to scan and pay
                         </p>
                     </div>
 
                     {/* Divider */}
-                    <div className="w-px bg-gray-300 dark:bg-gray-600 mx-4"></div>
+                    <div className="lg:w-px lg:bg-gray-300 lg:dark:bg-gray-600 lg:mx-4 w-full h-px bg-gray-300 dark:bg-gray-600 mx-0 my-4 lg:my-0"></div>
 
                     {/* UPI Apps & Manual Entry Section */}
-                    <div className="flex-1 flex flex-col pl-6">
-                        <h3 className="font-poppins font-semibold mb-3">Choose UPI App</h3>
+                    <div className="flex-1 flex flex-col lg:pl-6">
+                        <h3 className="font-poppins font-semibold mb-3 lg:text-base md:text-base sm:text-lg">Choose UPI App</h3>
                         
                         {/* UPI Apps Grid */}
-                        <div className="grid grid-cols-2 gap-3 mb-4">
+                        <div className="grid grid-cols-2 gap-3 mb-4 lg:grid-cols-2 lg:gap-3 md:grid-cols-4 md:gap-2 sm:grid-cols-2 sm:gap-3">
                             {upiApps.map((app) => (
                                 <button
                                     key={app.name}
@@ -72,10 +75,10 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
                                         selectedUPIApp === app.name
                                             ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 scale-105'
                                             : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
-                                    }`}
+                                    } lg:p-1.5 md:p-1 sm:p-2`}
                                 >
                                     <div
-                                        className="w-9 h-9 bg-gradient-to-r mx-auto mb-2"
+                                        className="w-9 h-9  lg:w-9 lg:h-9 bg-gradient-to-r mx-auto mb-2 lg:mb-2 md:w-6 md:h-6 md:mb-1 sm:w-8 sm:h-8 sm:mb-2"
                                         style={{
                                             backgroundImage: `url(${app.logo})`,
                                             backgroundSize: 'contain',
@@ -83,17 +86,17 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
                                             backgroundRepeat: 'no-repeat',
                                         }}
                                     ></div>
-                                    <span className="text-xs font-medium">{app.name}</span>
+                                    <span className="text-xs font-medium lg:text-xs md:text-xs sm:text-xs">{app.name}</span>
                                 </button>
                             ))}
                         </div>
 
                         {/* UPI ID Input */}
-                        <div className="mb-6">
-                            <label className="text-sm font-semibold mb-2 block">
+                        <div className="mb-6 lg:mb-6 md:mb-4 sm:mb-6">
+                            <label className="text-sm font-semibold mb-2 block lg:text-sm md:text-xs sm:text-sm">
                                 Enter UPI ID
                                 {upiError && (
-                                    <span className="ml-2 text-xs text-red-500 font-normal">{upiError}</span>
+                                    <span className="ml-2 text-xs text-red-500 font-normal lg:text-xs md:text-xs sm:text-xs">{upiError}</span>
                                 )}
                             </label>
                             <div className="relative group">
@@ -105,7 +108,8 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
                                     title="Enter a valid UPI ID (lowercase letters, numbers, dot, dash, @, e.g. varunprajapati123-1@okhdfc)"
                                     className="w-full px-1 py-1.5 bg-transparent  rounded-lg 
                                              text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-500
-                                             focus:border-blue-500 focus:outline-none transition-colors duration-300"
+                                             focus:border-blue-500 focus:outline-none transition-colors duration-300
+                                             lg:text-base lg:py-1.5 md:text-sm md:py-1 sm:text-base sm:py-2"
                                     autoComplete="off"
                                     onChange={() => setUpiError('')}
                                 />
@@ -115,7 +119,10 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
 
                         {/* Verify & Pay Button */}
                         <Button
-                            className=" rounded-2xl backdrop-blur-xl bg-emerald-500/20 dark:bg-emerald-400/20 border-2 border-emerald-500/30 dark:border-emerald-400/30 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-500/30 dark:hover:bg-emerald-400/30 hover:scale-105 shadow-lg hover:shadow-emerald-500/20"
+                            className="rounded-2xl backdrop-blur-xl bg-emerald-500/20 dark:bg-emerald-400/20 border-2 border-emerald-500/30 dark:border-emerald-400/30 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-500/30 dark:hover:bg-emerald-400/30 hover:scale-105 shadow-lg hover:shadow-emerald-500/20
+                                       lg:text-base lg:py-2
+                                       md:text-sm md:py-2
+                                       sm:text-base sm:py-3 sm:w-full"
                             onClick={() => {
                                 const upiId = upiIdRef.current?.value.trim() || '';
                                 if (upiId) {
@@ -129,7 +136,7 @@ const UPICard = ({amount, onPay}: {amount: number, onPay: (amount: number, provi
                             }}
                         >
                             <span className="inline-flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 lg:w-6 lg:h-6 md:w-4 md:h-4 sm:w-5 sm:h-5">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.623 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                                 </svg>
                                 Verify & Pay

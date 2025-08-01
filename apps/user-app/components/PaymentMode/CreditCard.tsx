@@ -16,25 +16,29 @@ const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
 
     return (
         <div>
-            <div className="p-6 w-full max-w-2xl h-80 backdrop-blur-xl bg-black/25 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg shadow-black/20">
+            <div className="p-6 w-full max-w-2xl h-80 backdrop-blur-xl bg-black/25 dark:bg-white/15 rounded-2xl border-2 border-black/15 dark:border-white/10 shadow-lg shadow-black/20
+                            lg:p-6 lg:h-80
+                            md:p-4 md:h-72
+                            sm:p-4 sm:h-auto sm:min-h-80">
                 {/* Logo */}
                 <div className="">
-                    <div className="grid grid-cols-2 w-12">
-                        <div className="w-6 h-6 bg-black/60 dark:bg-white/70 rounded-full "></div>
-                        <div className="w-6 h-6 bg-black/60 dark:bg-white/70 rounded-full "></div>
-                        <div className="w-6 h-6 bg-black/60 dark:bg-white/70 rounded-full "></div>
-                        <div className="w-6 h-6 bg-black/60 dark:bg-white/70 rounded-full "></div>
+                    <div className="grid grid-cols-2 w-12 md:w-10 sm:w-12">
+                        <div className="w-6 h-6 bg-black/60 dark:bg-white/70 rounded-full md:w-5 md:h-5 sm:w-6 sm:h-6"></div>
+                        <div className="w-6 h-6 bg-black/60 dark:bg-white/70 rounded-full md:w-5 md:h-5 sm:w-6 sm:h-6"></div>
+                        <div className="w-6 h-6 bg-black/60 dark:bg-white/70 rounded-full md:w-5 md:h-5 sm:w-6 sm:h-6"></div>
+                        <div className="w-6 h-6 bg-black/60 dark:bg-white/70 rounded-full md:w-5 md:h-5 sm:w-6 sm:h-6"></div>
                     </div>
                 </div>
 
                 {/* Card Number */}
-                <div className=" mt-8 w-full h-20  ">
-                    <div className="font-nunito text-sm font-semibold h-[20%]">Card Number</div>
-                    <div className="h-[80%] pt-2 text-4xl relative group">
+                <div className="mt-8 w-full h-20 md:mt-6 md:h-16 sm:mt-4 sm:h-16">
+                    <div className="font-nunito text-sm font-semibold h-[20%] md:text-xs sm:text-xs">Card Number</div>
+                    <div className="h-[80%] pt-2 text-4xl relative group md:text-3xl sm:text-xl">
                         <input
                             type="text"
                             maxLength={19}
-                            className="font-jetbrains w-[80%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300"
+                            className="font-jetbrains w-[80%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300
+                                       md:text-3xl sm:text-xl sm:w-full"
                             placeholder="1234 1234 1234 1234"
                             onInput={e => {
                                 const input = e.currentTarget;
@@ -49,20 +53,22 @@ const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                                 scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100
                                 origin-left  transition-transform duration-300
                                 pointer-events-none
+                                sm:w-full
                             "
                         />
                     </div>
                 </div>
 
                 {/* Card Holder Details*/}
-                <div className="w-full h-10 mt-8 grid grid-cols-12 ">
+                <div className="w-full h-10 mt-8 grid grid-cols-12 md:mt-6 md:h-8 md:grid-cols-12 sm:mt-4 sm:h-auto sm:grid-cols-12 sm:gap-2">
                     {/* Card Holder Name */}
-                    <div className="col-span-6 ">
-                        <div className="font-nunito text-sm font-semibold h-[20%]">Card Holder</div>
-                        <div className="h-[80%] pt-1.5 text-2xl relative group">
+                    <div className="col-span-6 md:col-span-6 sm:col-span-12">
+                        <div className="font-nunito text-sm font-semibold h-[20%] md:text-xs sm:text-xs sm:mb-1">Card Holder</div>
+                        <div className="h-[80%] pt-1.5 text-2xl relative group md:text-xl sm:text-base sm:h-auto sm:pt-1">
                             <input
                                 type="text"
-                                className="font-jetbrains w-[90%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300 border-black"
+                                className="font-jetbrains w-[90%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300 border-black
+                                           md:text-xl sm:text-base sm:w-full"
                                 placeholder="VARUN KUMAR"
                                 onInput={e => {
                                     const input = e.currentTarget;
@@ -76,18 +82,20 @@ const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                                 scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100
                                 origin-left  transition-transform duration-300
                                 pointer-events-none
+                                sm:w-full
                                 "
                             />
                         </div>
                     </div>
                     {/* Card Expiry Date */}
-                    <div className="col-span-3 ">
-                        <div className="font-nunito text-sm font-semibold h-[20%]">Exp. Date</div>
-                        <div className="h-[80%] pt-1.5 text-2xl relative group">
+                    <div className="col-span-3 md:col-span-3 sm:col-span-6">
+                        <div className="font-nunito text-sm font-semibold h-[20%] md:text-xs sm:text-xs sm:mb-1">Exp. Date</div>
+                        <div className="h-[80%] pt-1.5 text-2xl relative group md:text-xl sm:text-base sm:h-auto sm:pt-1">
                             <input
                                 type="text"
                                 maxLength={5}
-                                className="font-jetbrains w-[80%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300"
+                                className="font-jetbrains w-[80%] bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300
+                                           md:text-xl sm:text-base sm:w-full"
                                 placeholder="05/24"
                                 onInput={e => {
                                     let value = e.currentTarget.value.replace(/\D/g, '');
@@ -122,18 +130,20 @@ const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                                 scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100
                                 origin-left  transition-transform duration-300
                                 pointer-events-none
+                                sm:w-full
                                 "
                             />
                         </div>
                     </div>
                     {/* Card CVV */}
-                    <div className="col-span-3 ">
-                        <div className="font-nunito text-sm font-semibold h-[20%]">CVV</div>
-                        <div className="h-[80%] pt-1.5 text-2xl relative group">
+                    <div className="col-span-3 md:col-span-3 sm:col-span-6">
+                        <div className="font-nunito text-sm font-semibold h-[20%] md:text-xs sm:text-xs sm:mb-1">CVV</div>
+                        <div className="h-[80%] pt-1.5 text-2xl relative group md:text-xl sm:text-base sm:h-auto sm:pt-1">
                             <input
                                 type="text"
                                 maxLength={3}
-                                className="font-jetbrains w-full bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300"
+                                className="font-jetbrains w-full bg-transparent text-black placeholder-black/40 dark:text-white dark:placeholder-white/40 outline-none border-none transition-all duration-300
+                                           md:text-xl sm:text-base"
                                 placeholder="000"
                                 onInput={e => {
                                     const input = e.currentTarget;
@@ -146,6 +156,7 @@ const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
                                 scale-x-0 group-hover:scale-x-100 group-focus-within:scale-x-100
                                 origin-left  transition-transform duration-300
                                 pointer-events-none
+                                sm:w-full
                                 "
                             />
                         </div>
@@ -154,11 +165,13 @@ const CreditCard = ({amount, onPay}: {amount: number, onPay: (amount: number, pr
             </div>
             <div>
                 <Button 
-                    className='mt-4 rounded-2xl backdrop-blur-xl bg-emerald-500/20 dark:bg-emerald-400/20 border-2 border-emerald-500/30 dark:border-emerald-400/30 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-500/30 dark:hover:bg-emerald-400/30 hover:scale-105 shadow-lg hover:shadow-emerald-500/20'
+                    className='mt-4 rounded-2xl backdrop-blur-xl bg-emerald-500/20 dark:bg-emerald-400/20 border-2 border-emerald-500/30 dark:border-emerald-400/30 text-emerald-900 dark:text-emerald-100 hover:bg-emerald-500/30 dark:hover:bg-emerald-400/30 hover:scale-105 shadow-lg hover:shadow-emerald-500/20
+                               md:mt-3 md:text-sm md:py-2
+                               sm:mt-4 sm:text-base sm:py-3 sm:w-full'
                     onClick={handleClick}
                 >
                     <span className="inline-flex items-center gap-2">
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-6 h-6 md:w-4 md:h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                         </svg>
                         Verify & Pay

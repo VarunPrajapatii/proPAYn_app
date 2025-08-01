@@ -54,7 +54,7 @@ export default function Title2() {
   const rightColumnImages = images.filter((_, index) => index % 2 === 1);
 
   return (
-    <div className="scroll-smooth h-[120vh] w-full relative flex flex-col items-center justify-center antialiased overflow-hidden bg-gradient-to-b from-slate-50 to-slate-100 dark:from-[#1a082f] dark:to-black">
+    <div className="scroll-smooth h-[180vh] md:h-[120vh] w-full relative flex flex-col items-center justify-center antialiased overflow-hidden bg-gradient-to-b from-slate-50 to-slate-100 dark:from-[#1a082f] dark:to-black">
       <header className="z-20 grid grid-cols-1 gap-y-16 pt-16 md:grid-flow-row md:pt-24 lg:grid-flow-col lg:grid-cols-2 lg:items-center lg:pt-0 h-full w-full max-w-7xl mx-auto px-6">
         <div className="max-w-[42rem] justify-self-start lg:justify-self-end lg:pr-12">
           <div className="space-y-8">
@@ -96,7 +96,7 @@ export default function Title2() {
           </div>
         </div>
         
-        <div className="h-[35rem] overflow-hidden lg:h-screen lg:pl-8">
+        <div className="h-[35rem] overflow-hidden md:h-[35rem] lg:h-screen lg:pl-8">
           <div className="grid w-full grid-cols-2 gap-x-6">
             {/* Left Column */}
             <div className="-mt-[120%] grid size-full animate-loop-vertically columns-2 grid-cols-1 gap-6 self-center">

@@ -4,7 +4,7 @@ import GetStartedButton from "./GetStartedButton";
 const Title1 = () => {
     return (
         <BackgroundGradientAnimation size="100%">
-            <div className="scroll-smooth relative z-10 h-screen w-screen flex flex-col items-center justify-center px-4">
+            <div className="scroll-smooth relative z-10 h-screen w-screen flex flex-col items-center justify-center px-4 mt-10 sm:mt-0">
                 <div className="text-center max-w-7xl mx-auto">
                     {/* Main heading */}
                     <div className="space-y-6 mb-8 font-poppins ">
